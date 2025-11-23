@@ -1,0 +1,184 @@
+/* Reset leggero */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Alice", serif;
+  background-color: #ffffff;
+  color: #333333;
+  line-height: 1.6;
+}
+
+/* Layout generale */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+/* Header + Nav */
+.site-header {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 0;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.brand a {
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #333333;
+  letter-spacing: 0.04em;
+}
+
+.site-nav {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.95rem;
+}
+
+.site-nav a {
+  text-decoration: none;
+  color: #444444;
+  position: relative;
+  padding-bottom: 0.25rem;
+}
+
+.site-nav a:hover::after,
+.site-nav a:focus::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60%;
+  height: 1px;
+  background-color: #333333;
+}
+
+/* Hero split */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 3rem;
+  align-items: center;
+  padding: 3rem 0 4rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.hero-text {
+  padding-right: 2rem;
+}
+
+.hero-date {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  color: #777777;
+}
+
+.hero h1 {
+  font-size: 3.3rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin-bottom: 1rem;
+}
+
+.hero-location {
+  font-size: 1rem;
+  color: #555555;
+  margin-bottom: 1.75rem;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.65rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid #374936;
+  text-decoration: none;
+  color: #374936;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Immagine fiore */
+.hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Sezioni interne */
+.section {
+  padding: 4rem 0;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.04em;
+}
+
+.section p {
+  max-width: 40rem;
+  font-size: 1rem;
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid #f3f3f3;
+  padding: 2rem 1.5rem 3rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777777;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-text {
+    padding-right: 0;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+  }
+
+  .site-nav {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
