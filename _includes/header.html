@@ -3,15 +3,26 @@
     <div class="brand">
       <a href="{{ '/' | relative_url }}">{{ site.wedding.couple_names }}</a>
     </div>
-    <nav class="site-nav">
-      <a href="#home">Home</a>
-      <a href="#story">Story</a>
-      <a href="#where-to-stay">Where to Stay</a>
-      <a href="#rsvp">RSVP</a>
-      <a href="#travel">Travel</a>
-      <a href="#qa">Q &amp; A</a>
-    </nav>
   </div>
+
+    <div class="nav-bar">
+        <nav class="site-nav">
+            <a href="#home">Home</a>
+            <a href="#story">Story</a>
+            <a href="#where-to-stay">Where to Stay</a>
+            <a href="#rsvp">RSVP</a>
+            <a href="#travel">Travel</a>
+            <a href="#qa">Q &amp; A</a>
+        </nav>
+    </div>
+
+    <div class="hero-image">
+        <!-- Metti la tua illustrazione qui -->
+        <img
+                src="{{ '/assets/img/flower.jpg' | relative_url }}"
+                alt="Flower illustration"
+        />
+    </div>
 
   <section id="home" class="hero">
     <div class="hero-text">
@@ -23,12 +34,6 @@
       </p>
       <a href="{{ site.wedding.rsvp_link }}" class="btn-primary">RSVP</a>
     </div>
-    <div class="hero-image">
-      <!-- Metti la tua illustrazione qui -->
-      <img
-        src="{{ '/assets/img/flower-placeholder.png' | relative_url }}"
-        alt="Flower illustration"
-      />
-    </div>
+
   </section>
 </header>

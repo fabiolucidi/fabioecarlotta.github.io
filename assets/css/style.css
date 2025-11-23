@@ -13,7 +13,7 @@ body {
 }
 
 body {
-  font-family: "Alice", serif;
+  font-family: "Raleway", system-ui, sans-serif;
   background-color: #ffffff;
   color: #333333;
   line-height: 1.6;
@@ -40,16 +40,39 @@ main {
   margin-bottom: 2rem;
 }
 
+.brand {
+    font-family: "Alice", serif;
+    order: 2;                 /* posiziona il logo al centro */
+    margin: 0 auto;
+}
+
 .brand a {
-  font-size: 1.1rem;
+  font-size: 4rem;
   text-decoration: none;
   color: #333333;
   letter-spacing: 0.04em;
 }
 
+.site-nav,
+.other-item {            /* eventuali altri blocchi */
+    flex-shrink: 0;
+}
+
+.nav-bar a {
+    font-size: 1rem;
+    text-decoration: none;
+    color: #333333;
+    letter-spacing: 0.04em;
+}
+
 .site-nav {
+  max-width: 60%;
+  margin: 0 auto;        /* centra il blocco .site‑nav nel suo contenitore */
+  text-align: center;    /* centra il testo dei link */
   display: flex;
-  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   font-size: 0.95rem;
 }
 
@@ -66,23 +89,36 @@ main {
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 60%;
+  width: 100%;
   height: 1px;
   background-color: #333333;
 }
 
+
+.raleway-<uniquifier> {
+              font-family: "Raleway", sans-serif;
+              font-optical-sizing: auto;
+              font-weight: <weight>;
+              font-style: normal;
+}
+
+
 /* Hero split */
 .hero {
-  display: grid;
+  display: flex;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: 3rem;
   align-items: center;
   padding: 3rem 0 4rem;
   border-bottom: 1px solid #f0f0f0;
+ justify-content: center;
+  margin: 0 auto;
 }
 
 .hero-text {
+  justify-content: center;
   padding-right: 2rem;
+  text-align: center;
 }
 
 .hero-date {
@@ -94,7 +130,8 @@ main {
 }
 
 .hero h1 {
-  font-size: 3.3rem;
+    font-family: "Alice", serif;
+    font-size: 3.3rem;
   font-weight: 400;
   letter-spacing: 0.03em;
   margin-bottom: 1rem;
@@ -126,7 +163,7 @@ main {
 }
 
 .hero-image img {
-  max-width: 100%;
+  max-width: 35%;
   height: auto;
 }
 
