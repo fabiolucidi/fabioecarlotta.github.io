@@ -38,6 +38,7 @@ main {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2rem;
+
 }
 
 .brand {
@@ -56,6 +57,7 @@ main {
 .site-nav,
 .other-item {            /* eventuali altri blocchi */
     flex-shrink: 0;
+
 }
 
 .nav-bar a {
@@ -122,7 +124,7 @@ main {
 }
 
 .hero-date {
-  font-size: 0.95rem;
+  font-size: 2rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
@@ -134,13 +136,19 @@ main {
     font-size: 3.3rem;
   font-weight: 400;
   letter-spacing: 0.03em;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
 .hero-location {
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: #555555;
-  margin-bottom: 1.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.hero-location2 {
+    font-size: 1.25rem;
+    color: #555555;
+    margin-bottom: 1.75rem;
 }
 
 .btn-primary {
@@ -171,17 +179,21 @@ main {
 .section {
   padding: 4rem 0;
   border-bottom: 1px solid #f3f3f3;
+  text-align: center;
 }
 
 .section h2 {
+  font-family: "Alice", serif;
   font-size: 2rem;
   margin-bottom: 1.5rem;
   letter-spacing: 0.04em;
 }
 
 .section p {
-  max-width: 40rem;
+  max-width: 80%;
   font-size: 1rem;
+  text-align: center;
+  margin: 0 auto;
 }
 
 /* Footer */
@@ -219,3 +231,23 @@ main {
   }
 }
 
+
+
+/* Stato normale (prima dello scroll) */
+#navbar {
+    width: 100%;
+    background: transparent;          /* o il colore che vuoi prima dello scroll */
+    transition: all .3s ease;
+}
+
+/* Stato “fissato” – verrà aggiunta la classe .fixed via JS */
+#navbar.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;                 /* colore di sfondo quando è sticky */
+    padding: 0.6rem 1.5rem;           /* riduci l’altezza se vuoi */
+    box-shadow: 0 2px 8px rgba(0,0,0,.12);
+    z-index: 1000;
+}

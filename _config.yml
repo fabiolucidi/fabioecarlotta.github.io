@@ -1,5 +1,5 @@
 title: "Fabio & Carlotta"
-baseurl: "/fabioecarlotta" # se lo metti su GitHub Pages tipo /fabioecarlotta aggiorna questo
+baseurl: "" # se lo metti su GitHub Pages tipo /fabioecarlotta aggiorna questo
 url: "https://www.fabioecarlotta.it"     # es. https://tuodominio.it
 markdown: kramdown
 theme: null
@@ -8,7 +8,7 @@ theme: null
 wedding:
   couple_names: "Fabio & Carlotta"
   date: "Sabato 20 Giugno 2026"
-  location_line1: "Romagnano, Verona"
-  location_line2: "Italy"
-  rsvp_link: "#rsvp"
+  location_line1: "Villa Pellegrini"
+  location_line2: "Romagnano di Valpantena, Verona"
+  rsvp_link: "https://withjoy.com/fabioecarlotta/rsvp"
 
