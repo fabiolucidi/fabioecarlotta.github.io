@@ -7,8 +7,8 @@ theme: null
 # Dati che puoi riusare nei template
 wedding:
   couple_names: "Fabio & Carlotta"
-  date: "Sabato 20 Giugno 2026"
+  date: "20th of June 2026"
   location_line1: "Villa Pellegrini"
   location_line2: "Romagnano di Valpantena, Verona"
-  rsvp_link: "https://withjoy.com/fabioecarlotta/rsvp"
+  rsvp_link: ""
 
