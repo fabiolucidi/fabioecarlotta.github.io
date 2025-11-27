@@ -160,6 +160,8 @@
 
 <script src="https://www.google.com/recaptcha/api.js?render=6LdV-hksAAAAAOZeCaFMugl_hg5fa4Adk8iOprYM"></script>
 
+<script src="https://www.google.com/recaptcha/api.js?render=6LdV-hksAAAAAOZeCaFMugl_hg5fa4Adk8iOprYM"></script>
+
 <script>
     document.getElementById("rsvp-form").addEventListener("submit", function(e) {
         e.preventDefault();
@@ -168,18 +170,31 @@
 
         grecaptcha.ready(() => {
             grecaptcha.execute("6LdV-hksAAAAAOZeCaFMugl_hg5fa4Adk8iOprYM", {action: "submit"}).then(token => {
-                document.getElementById("recaptchaToken").value = token;
-                const data = new FormData(document.getElementById("rsvp-form"));
 
-                fetch("https://script.google.com/macros/s/AKfycbyRE6KdC8y9hOYYPwA96E9XcWPN7qMWPhxUGCMl62-R7bAYYv2XCQtxB_yJz_iVIcEj/exec", {
+                const form = document.getElementById("rsvp-form");
+
+                const payload = {
+                    nome: form.nome.value,
+                    email: form.email.value,
+                    presenza: form.presenza.value,
+                    accompagnatori: form.accompagnatori.value,
+                    messaggio: form.messaggio.value,
+                    token: token
+                };
+
+                fetch("https://script.google.com/macros/s/AKfycbzY5LdgQ9lBFN-mVsvlJPB2E1n8If1z6A6SZkE5xRwKXxo5v2gFmHAHlDmeYuibQrFv/exec", {
                     method: "POST",
-                    body: data
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
                 })
-                    .then(() => {
+                    .then(async res => {
                         const result = document.getElementById("result");
                         result.textContent = "Grazie! Abbiamo ricevuto il tuo RSVP.";
                         result.classList.add("success");
-                        document.getElementById("rsvp-form").reset();
+                        form.reset();
                     })
                     .catch(() => {
                         document.getElementById("result").textContent = "Errore nell'invio.";
