@@ -64,11 +64,11 @@
 </div>
 
 <!-- reCAPTCHA v3: inserisci la tua SITE KEY qui sotto (client-side) -->
-<script src="https://www.google.com/recaptcha/api.js?render=6LdV-hksAAAAAOZeCaFMugl_hg5fa4Adk8iOprYM"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LfSNhosAAAAAAGFpMX5do3nDtl8ImAYIgpHLV8k"></script>
 
 <script>
     // Sostituisci con il tuo URL /exec dopo il deploy
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzWRni4I_JEAjcfiDDjBT35g2-fvw8PGBk97wOA_jbIqClzUFzQs-OwY2FgyPyxqx8p/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzc5VI57Xbut0BwrtsxefUDoMz_0HGYQEhIbo8HqdenYnt7Ehuw4yEGkIs8Gwp_osp2/exec";
 
     (function () {
         const form = document.getElementById("rsvp-form");
@@ -91,7 +91,7 @@
 
             try {
                 // Chiediamo il token a reCAPTCHA v3
-                const siteKey = "6LdV-hksAAAAAOZeCaFMugl_hg5fa4Adk8iOprYM";
+                const siteKey = "6LfSNhosAAAAAAGFpMX5do3nDtl8ImAYIgpHLV8k";
                 const token = await grecaptcha.execute(siteKey, { action: "submit" });
 
                 // Costruiamo il payload JSON
