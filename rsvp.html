@@ -1,0 +1,190 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400&display=swap">
+
+<style>
+    body {
+        font-family: "Inter", sans-serif;
+        background: #faf9f5;
+        padding: 20px;
+    }
+
+    .form-container {
+        max-width: 500px;
+        margin: auto;
+        background: #fff;
+        padding: 35px 32px;
+        border-radius: 16px;
+        box-shadow: 0 4px 22px rgba(0,0,0,0.08);
+        animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+        text-align: center;
+        font-family: "Playfair Display", serif;
+        font-weight: 400;
+        font-size: 28px;
+        margin-bottom: 18px;
+    }
+
+    .floating-label {
+        position: relative;
+        margin-bottom: 22px;
+    }
+
+    .floating-label input,
+    .floating-label textarea,
+    .floating-label select {
+        width: 100%;
+        border: 1px solid #ddd;
+        padding: 14px 12px;
+        border-radius: 10px;
+        font-size: 1rem;
+        background: #fcfcfc;
+        transition: border-color .25s, box-shadow .25s;
+    }
+
+    .floating-label input:focus,
+    .floating-label textarea:focus,
+    .floating-label select:focus {
+        border-color: #bca98c;
+        box-shadow: 0 0 0 3px rgba(188,169,140,0.25);
+        outline: none;
+    }
+
+    .floating-label label {
+        position: absolute;
+        top: 14px;
+        left: 12px;
+        color: #888;
+        pointer-events: none;
+        transition: all .22s ease;
+    }
+
+    .floating-label input:focus + label,
+    .floating-label input:not(:placeholder-shown) + label,
+    .floating-label textarea:focus + label,
+    .floating-label textarea:not(:placeholder-shown) + label,
+    .floating-label select:focus + label,
+    .floating-label select:not([value=""]) + label {
+        top: -8px;
+        left: 8px;
+        font-size: 0.8rem;
+        background: #fff;
+        padding: 0 4px;
+        color: #b79a78;
+    }
+
+    button {
+        width: 100%;
+        padding: 15px;
+        background: #111;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: transform .15s, background .2s;
+    }
+
+    button:hover {
+        transform: scale(1.02);
+        background: #333;
+    }
+
+    button:active {
+        transform: scale(0.97);
+    }
+
+    #result {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: 500;
+    }
+
+    #result.success {
+        color: #6aa583;
+        animation: fadeUp .4s ease;
+    }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="form-container">
+    <h2>RSVP</h2>
+
+    <form id="rsvp-form">
+        <div class="floating-label">
+            <input type="text" name="nome" required placeholder=" " />
+            <label>Nome e cognome</label>
+        </div>
+
+        <div class="floating-label">
+            <input type="email" name="email" required placeholder=" " />
+            <label>Email</label>
+        </div>
+
+        <div class="floating-label">
+            <select name="presenza" required>
+                <option value="" disabled selected hidden></option>
+                <option value="Sì">Sì</option>
+                <option value="No">No</option>
+            </select>
+            <label>Parteciperai?</label>
+        </div>
+
+        <div class="floating-label">
+            <input type="number" name="accompagnatori" min="0" placeholder=" " required />
+            <label>Numero di accompagnatori</label>
+        </div>
+
+        <div class="floating-label">
+            <textarea name="messaggio" placeholder=" "></textarea>
+            <label>Messaggio</label>
+        </div>
+
+        <input type="text" name="website" id="website" style="display:none">
+        <input type="hidden" name="token" id="recaptchaToken">
+
+        <button type="submit">Invia RSVP</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script src="https://www.google.com/recaptcha/api.js?render=6LdV-hksAAAAAOZeCaFMugl_hg5fa4Adk8iOprYM"></script>
+
+<script>
+    document.getElementById("rsvp-form").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        if (document.getElementById("website").value !== "") return;
+
+        grecaptcha.ready(() => {
+            grecaptcha.execute("6LdV-hksAAAAAOZeCaFMugl_hg5fa4Adk8iOprYM", {action: "submit"}).then(token => {
+                document.getElementById("recaptchaToken").value = token;
+                const data = new FormData(document.getElementById("rsvp-form"));
+
+                fetch("https://script.google.com/macros/s/AKfycbyRE6KdC8y9hOYYPwA96E9XcWPN7qMWPhxUGCMl62-R7bAYYv2XCQtxB_yJz_iVIcEj/exec", {
+                    method: "POST",
+                    body: data
+                })
+                    .then(() => {
+                        const result = document.getElementById("result");
+                        result.textContent = "Grazie! Abbiamo ricevuto il tuo RSVP.";
+                        result.classList.add("success");
+                        document.getElementById("rsvp-form").reset();
+                    })
+                    .catch(() => {
+                        document.getElementById("result").textContent = "Errore nell'invio.";
+                    });
+            });
+        });
+    });
+</script>
