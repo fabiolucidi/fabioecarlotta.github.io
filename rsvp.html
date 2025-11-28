@@ -63,52 +63,49 @@
     </form>
 </div>
 
-<!-- reCAPTCHA v3: inserisci la tua SITE KEY qui sotto (client-side) -->
+<!-- reCAPTCHA v3 -->
 <script src="https://www.google.com/recaptcha/api.js?render=6Lf4GRssAAAAAJj23-q_uwVdPT-t6xXs5zhR5kWi"></script>
 
 <script>
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbxGR57CeEuZvHwZkZTo1rPIEAt3ue1dgmerXFuUvUbwxUM6WOFGV5FYJEPoYgBS8FA/exec";
+
     document.getElementById("rsvp-form").addEventListener("submit", function(e) {
         e.preventDefault();
 
-        if (document.getElementById("website").value !== "") return;
-
         grecaptcha.ready(() => {
-            grecaptcha.execute("6Lf4GRssAAAAAJj23-q_uwVdPT-t6xXs5zhR5kWi", { action: "submit" })
-                .then(token => {
+            grecaptcha.execute("6Lf4GRssAAAAAJj23-q_uwVdPT-t6xXs5zhR5kWi", {action: "submit"}).then(async (token) => {
 
-                    const form = document.getElementById("rsvp-form");
+                const data = {
+                    nome: document.getElementById("nome").value,
+                    email: document.getElementById("email").value,
+                    presenza: document.querySelector("input[name='presenza']:checked").value,
+                    note: document.getElementById("note").value,
+                    token: token
+                };
 
-                    const payload = {
-                        nome: form.nome.value,
-                        email: form.email.value,
-                        presenza: form.presenza.value,
-                        accompagnatori: form.accompagnatori.value,
-                        messaggio: form.messaggio.value,
-                        token: token
-                    };
-
-                    fetch("https://script.google.com/macros/s/AKfycbzdinhYGg5fhteVdHDT1qqZKBtJ9kXMzzyucLV30NTv4Evn6xzYlsCH1HfRF62Nadsp/exec", {
+                try {
+                    const res = await fetch(ENDPOINT, {
                         method: "POST",
-                        mode: "cors",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(payload)
-                    })
-                        .then(r => r.json())
-                        .then(res => {
-                            if (res.success) {
-                                const result = document.getElementById("result");
-                                result.textContent = "Grazie! Abbiamo ricevuto il tuo RSVP.";
-                                result.classList.add("success");
-                                form.reset();
-                            } else {
-                                document.getElementById("result").textContent =
-                                    "Errore: " + res.error;
-                            }
-                        })
-                        .catch(err => {
-                            document.getElementById("result").textContent = "Errore nell'invio.";
-                        });
-                });
+                        body: JSON.stringify(data)
+                    });
+
+                    const json = await res.json();
+
+                    if (json.status === "success") {
+                        alert("Grazie! La tua risposta è stata registrata.");
+                    } else if (json.reason === "recaptcha_failed") {
+                        alert("Il sistema anti-spam ha bloccato l'invio. Riprova.");
+                    } else {
+                        alert("Errore imprevisto.");
+                    }
+
+                } catch (err) {
+                    console.error(err);
+                    alert("Errore di connessione.");
+                }
+
+            });
         });
     });
 </script>
