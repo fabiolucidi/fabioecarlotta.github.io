@@ -64,80 +64,51 @@
 </div>
 
 <!-- reCAPTCHA v3: inserisci la tua SITE KEY qui sotto (client-side) -->
-<script src="https://www.google.com/recaptcha/api.js?render=6LfSNhosAAAAAAGFpMX5do3nDtl8ImAYIgpHLV8k"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6Lf4GRssAAAAAJj23-q_uwVdPT-t6xXs5zhR5kWi"></script>
 
 <script>
-    // Sostituisci con il tuo URL /exec dopo il deploy
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzc5VI57Xbut0BwrtsxefUDoMz_0HGYQEhIbo8HqdenYnt7Ehuw4yEGkIs8Gwp_osp2/exec";
+    document.getElementById("rsvp-form").addEventListener("submit", function(e) {
+        e.preventDefault();
 
-    (function () {
-        const form = document.getElementById("rsvp-form");
-        const resultEl = document.getElementById("result");
+        if (document.getElementById("website").value !== "") return;
 
-        form.addEventListener("submit", async function (e) {
-            e.preventDefault();
+        grecaptcha.ready(() => {
+            grecaptcha.execute("6Lf4GRssAAAAAJj23-q_uwVdPT-t6xXs5zhR5kWi", { action: "submit" })
+                .then(token => {
 
-            // Honeypot
-            if (document.getElementById("website").value !== "") return;
+                    const form = document.getElementById("rsvp-form");
 
-            // Validazione minima lato client
-            const nome = form.nome.value.trim();
-            const email = form.email.value.trim();
-            const presenza = form.presenza.value;
-            if (!nome || !email || !presenza) {
-                resultEl.textContent = "Compila i campi obbligatori.";
-                return;
-            }
+                    const payload = {
+                        nome: form.nome.value,
+                        email: form.email.value,
+                        presenza: form.presenza.value,
+                        accompagnatori: form.accompagnatori.value,
+                        messaggio: form.messaggio.value,
+                        token: token
+                    };
 
-            try {
-                // Chiediamo il token a reCAPTCHA v3
-                const siteKey = "6LfSNhosAAAAAAGFpMX5do3nDtl8ImAYIgpHLV8k";
-                const token = await grecaptcha.execute(siteKey, { action: "submit" });
-
-                // Costruiamo il payload JSON
-                const payload = {
-                    nome: nome,
-                    email: email,
-                    presenza: presenza,
-                    accompagnatori: form.accompagnatori.value || "",
-                    messaggio: form.messaggio.value || "",
-                    token: token
-                };
-
-                // Chiamata al Web App (Apps Script)
-                const resp = await fetch(WEB_APP_URL, {
-                    method: "POST",
-                    mode: "cors",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(payload)
+                    fetch("https://script.google.com/macros/s/AKfycbzdinhYGg5fhteVdHDT1qqZKBtJ9kXMzzyucLV30NTv4Evn6xzYlsCH1HfRF62Nadsp/exec", {
+                        method: "POST",
+                        mode: "cors",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload)
+                    })
+                        .then(r => r.json())
+                        .then(res => {
+                            if (res.success) {
+                                const result = document.getElementById("result");
+                                result.textContent = "Grazie! Abbiamo ricevuto il tuo RSVP.";
+                                result.classList.add("success");
+                                form.reset();
+                            } else {
+                                document.getElementById("result").textContent =
+                                    "Errore: " + res.error;
+                            }
+                        })
+                        .catch(err => {
+                            document.getElementById("result").textContent = "Errore nell'invio.";
+                        });
                 });
-
-                if (!resp.ok) {
-                    // leggiamo risposta JSON se presente
-                    let errText = "Errore nell'invio.";
-                    try {
-                        const j = await resp.json();
-                        if (j && j.error) errText = "Errore: " + j.error;
-                    } catch (e) { /* ignore */ }
-                    resultEl.textContent = errText;
-                    return;
-                }
-
-                const json = await resp.json();
-                if (json && json.success) {
-                    resultEl.textContent = "Grazie! Abbiamo ricevuto il tuo RSVP.";
-                    resultEl.classList.add("success");
-                    form.reset();
-                } else {
-                    resultEl.textContent = "Si è verificato un errore: " + (json && json.error ? json.error : "recaptcha o server");
-                }
-
-            } catch (err) {
-                console.error(err);
-                resultEl.textContent = "Errore di rete o server. Riprova più tardi.";
-            }
         });
-    })();
+    });
 </script>
