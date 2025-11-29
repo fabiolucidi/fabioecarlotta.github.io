@@ -417,10 +417,11 @@ main {
     }
 }
 
-.commit {
+.commit p, a {
     text-decoration: none;
-    font-family: "Andada Pro", serif;
-    font-size: 0.75rem;
+    font-family: Menlo, Consolas, Monaco, "Courier New", Courier, monospace
+    font-size: 1rem;
+    font-weight: 400;
     padding: 0.5em;
     margin-top: 2em;
     margin-bottom: 1em;
