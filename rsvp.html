@@ -24,9 +24,53 @@ title: RSVP
 
             <div class="phone-row">
                 <div class="floating-label">
-                    <input type="text" id="prefix" name="prefix" required placeholder=" " pattern="[0-9+() ]+" />
+                    <select id="prefix" name="prefix" required>
+                        <option value="" disabled selected hidden></option>
+
+                        <!-- PRIORITARI -->
+                        <option value="+39">🇮🇹 Italy (+39)</option>
+                        <option value="+44">🇬🇧 United Kingdom (+44)</option>
+                        <option value="+34">🇪🇸 Spain (+34)</option>
+                        <option value="+43">🇦🇹 Austria (+43)</option>
+                        <option value="+1">🇺🇸 United States (+1)</option>
+
+                        <option disabled>──────────</option>
+
+                        <!-- RESTO DEL MONDO (lista ottimizzata) -->
+                        <option value="+33">🇫🇷 France (+33)</option>
+                        <option value="+49">🇩🇪 Germany (+49)</option>
+                        <option value="+41">🇨🇭 Switzerland (+41)</option>
+                        <option value="+31">🇳🇱 Netherlands (+31)</option>
+                        <option value="+32">🇧🇪 Belgium (+32)</option>
+                        <option value="+351">🇵🇹 Portugal (+351)</option>
+                        <option value="+30">🇬🇷 Greece (+30)</option>
+                        <option value="+45">🇩🇰 Denmark (+45)</option>
+                        <option value="+46">🇸🇪 Sweden (+46)</option>
+                        <option value="+47">🇳🇴 Norway (+47)</option>
+                        <option value="+48">🇵🇱 Poland (+48)</option>
+                        <option value="+420">🇨🇿 Czech Republic (+420)</option>
+                        <option value="+421">🇸🇰 Slovakia (+421)</option>
+                        <option value="+36">🇭🇺 Hungary (+36)</option>
+                        <option value="+40">🇷🇴 Romania (+40)</option>
+                        <option value="+353">🇮🇪 Ireland (+353)</option>
+                        <option value="+972">🇮🇱 Israel (+972)</option>
+                        <option value="+90">🇹🇷 Turkey (+90)</option>
+                        <option value="+7">🇷🇺 Russia (+7)</option>
+                        <option value="+86">🇨🇳 China (+86)</option>
+                        <option value="+81">🇯🇵 Japan (+81)</option>
+                        <option value="+82">🇰🇷 South Korea (+82)</option>
+                        <option value="+61">🇦🇺 Australia (+61)</option>
+                        <option value="+64">🇳🇿 New Zealand (+64)</option>
+                        <option value="+91">🇮🇳 India (+91)</option>
+                        <option value="+52">🇲🇽 Mexico (+52)</option>
+                        <option value="+54">🇦🇷 Argentina (+54)</option>
+                        <option value="+55">🇧🇷 Brazil (+55)</option>
+                        <option value="+56">🇨🇱 Chile (+56)</option>
+                        <option value="+57">🇨🇴 Colombia (+57)</option>
+                    </select>
                     <label>Prefix*</label>
                 </div>
+
 
                 <div class="floating-label">
                     <input type="text" id="telefono" name="telefono" required placeholder=" " pattern="[0-9+() ]+" />
@@ -42,8 +86,26 @@ title: RSVP
             <button type="button" class="next-btn">Next</button>
         </div>
 
-        <!-- STEP 2 -->
+        <!-- NEW STEP 2 — WILL YOU JOIN US? -->
         <div class="step" id="step-2">
+            <h3 class="step-title">Wedding attendance</h3>
+
+            <div class="floating-label">
+                <select id="join" name="join" required>
+                    <option value="" disabled selected hidden></option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+                <label>Will you join us for our wedding?</label>
+            </div>
+
+            <button type="button" class="back-btn">Back</button>
+            <button type="button" class="next-btn">Next</button>
+        </div>
+
+
+        <!-- STEP 3 -->
+        <div class="step" id="step-3">
             <h3 class="step-title">Travel information</h3>
 
             <div class="floating-label">
@@ -69,8 +131,8 @@ title: RSVP
             <button type="button" class="next-btn">Next</button>
         </div>
 
-        <!-- STEP 3 -->
-        <div class="step" id="step-3">
+        <!-- STEP 4 -->
+        <div class="step" id="step-4">
             <h3 class="step-title">Food information</h3>
 
             <div class="floating-label">
@@ -109,8 +171,8 @@ title: RSVP
             <button type="button" class="next-btn">Next</button>
         </div>
 
-        <!-- STEP 4 -->
-        <div class="step" id="step-4">
+        <!-- STEP 5 -->
+        <div class="step" id="step-5">
             <h3 class="step-title">Others</h3>
 
             <div class="floating-label">
@@ -130,8 +192,7 @@ title: RSVP
 </div>
 
 <!-- reCAPTCHA -->
-<script src="https://www.google.com/recaptcha/api.js?render=6LfSNhosAAAAAAGFpMX5do3nDtl8ImAYIgpHLV8k
-"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LfSNhosAAAAAAGFpMX5do3nDtl8ImAYIgpHLV8k"></script>
 
 <!-- Confetti -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -140,7 +201,7 @@ title: RSVP
     /* ======================
        CONFIG
     ====================== */
-    const ENDPOINT = "https://script.google.com/macros/s/AKfycbzcQGQ60WkODHxLqcFzYCBgAkc_aUh_KFu51JJVJbH-zQL-un5v18X3FuaQVipb6Uuj/exec";
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbw9rTu1poEXSBb_q1OTctQ5K4YTrWmsDW4md4xYdJI2mYXEyVxcU2Mk-feFtztP2fln/exec";
     const SITE_KEY = "6LfSNhosAAAAAAGFpMX5do3nDtl8ImAYIgpHLV8k";
 
     /* ======================
@@ -151,79 +212,116 @@ title: RSVP
 
     function showStep(n) {
         steps.forEach(s => s.classList.remove("active"));
-        document.getElementById("step-" + n).classList.add("active");
-        currentStep = n;
+        const next = document.getElementById("step-" + n);
+        if (next) {
+            next.classList.add("active");
+            currentStep = n;
+        }
     }
 
     document.addEventListener("DOMContentLoaded", () => showStep(1));
 
+    /* BOTTONI "NEXT" */
     document.querySelectorAll(".next-btn").forEach(btn =>
-        btn.addEventListener("click", () => showStep(currentStep + 1))
+        btn.addEventListener("click", () => {
+
+            // STEP 2 — Wedding Attendance
+            if (currentStep === 2) {
+                const join = document.getElementById("join").value;
+
+                // If NO → immediate send
+                if (join === "No") {
+                    submitRSVP(false);  // NO CONFETTI
+                    return;
+                }
+            }
+
+            showStep(currentStep + 1);
+        })
     );
 
+    /* BOTTONI "BACK" */
     document.querySelectorAll(".back-btn").forEach(btn =>
         btn.addEventListener("click", () => showStep(currentStep - 1))
     );
 
-    /* Toggle campi allergie/dieta */
-    document.getElementById("allergie").addEventListener("change", e =>
+    /* TOGGLE ALLERGIE / DIETA */
+    document.getElementById("allergie").addEventListener("change", e => {
         document.getElementById("allergieField").style.display =
-            e.target.value === "Yes" ? "block" : "none"
-    );
-    document.getElementById("dieta").addEventListener("change", e =>
-        document.getElementById("dietaField").style.display =
-            e.target.value === "Yes" ? "block" : "none"
-    );
+            e.target.value === "Yes" ? "block" : "none";
+    });
 
-    /* Contatore caratteri */
+    document.getElementById("dieta").addEventListener("change", e => {
+        document.getElementById("dietaField").style.display =
+            e.target.value === "Yes" ? "block" : "none";
+    });
+
+    /* CONTATORE CARATTERI */
     document.getElementById("messaggio").addEventListener("input", function () {
         document.getElementById("char-count").textContent = this.value.length + "/500";
     });
 
+
     /* ======================
-       SUBMIT + RECAPTCHA
+       SUBMIT HANDLER
     ====================== */
     document.getElementById("rsvp-form").addEventListener("submit", function (e) {
         e.preventDefault();
-
-        grecaptcha.ready(() => {
-            grecaptcha.execute(SITE_KEY, { action: "submit" }).then(async token => {
-                const params = new URLSearchParams();
-
-                const fields = [
-                    "nome","cognome","prefix","telefono","email",
-                    "arrivo","shuttle","allergie","listaAllergie",
-                    "dieta","tipoDieta","messaggio"
-                ];
-
-                fields.forEach(f => params.append(f, document.getElementById(f)?.value || ""));
-                params.append("token", token);
-
-                try {
-                    const res = await fetch(ENDPOINT, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                        body: params.toString()
-                    });
-
-                    const json = await res.json();
-
-                    if (json.status === "success") {
-                        launchConfetti();
-                        showStep(1);
-                        document.getElementById("rsvp-form").reset();
-                        alert("Grazie! Il tuo RSVP è stato inviato.");
-                    } else {
-                        alert("Errore: " + JSON.stringify(json));
-                    }
-
-                } catch (err) {
-                    console.error(err);
-                    alert("Errore di connessione.");
-                }
-            });
-        });
+        submitRSVP(true);  // normal submit = YES confetti
     });
+
+
+    /* ======================
+       UNIFIED SUBMIT FUNCTION
+    ====================== */
+    async function submitRSVP(playConfetti = true) {
+
+        const token = await grecaptcha.execute(SITE_KEY, { action: "submit" });
+
+        const params = new URLSearchParams();
+
+        // TUTTI I CAMPI (incluso join!)
+        const fields = [
+            "nome","cognome",
+            "prefix","telefono","email",
+            "join",
+            "arrivo","shuttle",
+            "allergie","listaAllergie",
+            "dieta","tipoDieta",
+            "messaggio"
+        ];
+
+        fields.forEach(f =>
+            params.append(f, document.getElementById(f)?.value || "")
+        );
+
+        params.append("token", token);
+
+        try {
+            const res = await fetch(ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: params.toString()
+            });
+
+            const json = await res.json();
+
+            if (json.status === "success") {
+                if (playConfetti) launchConfetti();
+
+                showStep(1);
+                document.getElementById("rsvp-form").reset();
+                alert("Grazie! La tua risposta è stata registrata.");
+            } else {
+                alert("Errore: " + JSON.stringify(json));
+            }
+
+        } catch (err) {
+            console.error(err);
+            alert("Errore di connessione.");
+        }
+    }
+
 
     /* ======================
        CONFETTI
@@ -233,7 +331,7 @@ title: RSVP
         var end = Date.now() + duration;
 
         (function frame() {
-            confetti({ particleCount: 5, spread: 60 });
+            confetti({ particleCount: 6, spread: 70 });
             if (Date.now() < end) requestAnimationFrame(frame);
         })();
     }
