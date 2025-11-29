@@ -400,3 +400,18 @@ main {
     color: #777;
 }
 
+.floating-label select,
+.floating-label input {
+    height: 52px !important;
+    line-height: 52px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+@media (max-width: 480px) {
+    .floating-label select,
+    .floating-label input {
+        height: 56px !important;
+        line-height: 56px !important;
+    }
+}
