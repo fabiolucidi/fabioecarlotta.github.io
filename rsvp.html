@@ -65,8 +65,10 @@
 <!-- reCAPTCHA v3 -->
 <script src="https://www.google.com/recaptcha/api.js?render=6Lf4GRssAAAAAJj23-q_uwVdPT-t6xXs5zhR5kWi"></script>
 
+
+
 <script>
-    const ENDPOINT = "https://script.google.com/macros/s/AKfycbxGR57CeEuZvHwZkZTo1rPIEAt3ue1dgmerXFuUvUbwxUM6WOFGV5FYJEPoYgBS8FA/exec";
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbwFjb61e_46Eby-ShVDZh37wuwkKl9UwXGMFa9cs7LCaApAWzDwxIoW8KD390-fQvWm/exec"; // CORRETTO
 
     document.getElementById("rsvp-form").addEventListener("submit", function(e) {
         e.preventDefault();
@@ -93,18 +95,15 @@
                     const json = await res.json();
 
                     if (json.status === "success") {
-                        document.getElementById("result").textContent = "Grazie! Abbiamo ricevuto il tuo RSVP.";
-                        document.getElementById("result").classList.add("success");
+                        alert("Grazie! Abbiamo ricevuto il tuo RSVP.");
                         document.getElementById("rsvp-form").reset();
-                    } else if (json.reason === "recaptcha_failed") {
-                        alert("Errore reCAPTCHA. Riprova.");
                     } else {
-                        alert("Errore imprevisto.");
+                        alert("Errore: " + JSON.stringify(json));
                     }
 
                 } catch (err) {
                     console.error(err);
-                    alert("Errore di connessione.");
+                    alert("Errore di connessione");
                 }
 
             });
