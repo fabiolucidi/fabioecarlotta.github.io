@@ -417,7 +417,7 @@ main {
     }
 }
 
-.commit p, a {
+.commit a {
     text-decoration: none;
     font-family: Menlo, Consolas, Monaco, "Courier New", Courier, monospace
     font-size: 1rem;
