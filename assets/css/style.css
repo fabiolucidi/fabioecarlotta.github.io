@@ -251,3 +251,36 @@ main {
     box-shadow: 0 2px 8px rgba(0,0,0,.12);
     z-index: 1000;
 }
+
+.step {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all .4s ease;
+}
+
+.step.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.step-title {
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.phone-row {
+    display: flex;
+    gap: 10px;
+}
+
+.next-btn, .back-btn, .submit-btn {
+    margin-top: 20px;
+}
+
+#thankyou-animation {
+    margin-top: 20px;
+    min-height: 30px;
+}
