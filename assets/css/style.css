@@ -109,17 +109,17 @@ main {
 .hero {
   display: flex;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 3rem;
+  /* gap: 3rem; */
   align-items: center;
-  padding: 3rem 0 4rem;
+  /* padding: 3rem 0 4rem; */
   border-bottom: 1px solid #f0f0f0;
- justify-content: center;
+  justify-content: center;
   margin: 0 auto;
 }
 
 .hero-text {
   justify-content: center;
-  padding-right: 2rem;
+  /*padding-right: 2rem; */
   text-align: center;
 }
 
@@ -168,6 +168,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  text-align: center;
 }
 
 .hero-image img {
@@ -420,12 +421,9 @@ main {
 .commit a {
     text-decoration: none;
     font-family: Menlo, Consolas, Monaco, "Courier New", Courier, monospace
-    font-size: 1rem;
+    font-size: 0.75rem;
     font-weight: 400;
     padding: 0.5em;
-    margin-top: 2em;
-    margin-bottom: 1em;
     display: inline-block;
-    color: #404040;
 
 }
