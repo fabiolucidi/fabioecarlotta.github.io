@@ -24,7 +24,6 @@
     <h2>RSVP</h2>
 
     <form id="rsvp-form">
-
         <div class="floating-label">
             <input type="text" id="nome" name="nome" required placeholder=" " />
             <label>Nome e cognome</label>
@@ -55,58 +54,61 @@
         </div>
 
         <input type="text" name="website" id="website" style="display:none">
-        <input type="hidden" name="token" id="recaptchaToken">
 
         <button type="submit">Invia RSVP</button>
     </form>
 
 </div>
 
+
 <!-- reCAPTCHA v3 -->
 <script src="https://www.google.com/recaptcha/api.js?render=6Lf4GRssAAAAAJj23-q_uwVdPT-t6xXs5zhR5kWi"></script>
 
-
-
 <script>
-    const ENDPOINT = "https://script.google.com/macros/s/AKfycbwFjb61e_46Eby-ShVDZh37wuwkKl9UwXGMFa9cs7LCaApAWzDwxIoW8KD390-fQvWm/exec"; // CORRETTO
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbzWJrQfVyT_rKJ3_Q2_lXs27KwlNofwokRCcekpmNmf8RHdkQyZPyDkOIXh6OMKSNDn/exec";
 
     document.getElementById("rsvp-form").addEventListener("submit", function(e) {
         e.preventDefault();
 
+        // honeypot
+        if (document.getElementById("website").value !== "") return;
+
         grecaptcha.ready(() => {
-            grecaptcha.execute("6Lf4GRssAAAAAJj23-q_uwVdPT-t6xXs5zhR5kWi", {action: "submit"}).then(async (token) => {
+            grecaptcha.execute("6Lf4GRssAAAAAJj23-q_uwVdPT-t6xXs5zhR5kWi", {action: "submit"})
+                .then(async (token) => {
 
-                const data = {
-                    nome: document.getElementById("nome").value,
-                    email: document.getElementById("email").value,
-                    presenza: document.getElementById("presenza").value,
-                    accompagnatori: document.getElementById("accompagnatori").value,
-                    messaggio: document.getElementById("messaggio").value,
-                    token: token
-                };
+                    // costruiamo x-www-form-urlencoded
+                    const params = new URLSearchParams();
+                    params.append("nome", document.getElementById("nome").value);
+                    params.append("email", document.getElementById("email").value);
+                    params.append("presenza", document.getElementById("presenza").value);
+                    params.append("accompagnatori", document.getElementById("accompagnatori").value);
+                    params.append("messaggio", document.getElementById("messaggio").value);
+                    params.append("token", token);
 
-                try {
-                    const res = await fetch(ENDPOINT, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(data)
-                    });
+                    try {
+                        const res = await fetch(ENDPOINT, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+                            body: params.toString()
+                        });
 
-                    const json = await res.json();
+                        const json = await res.json();
 
-                    if (json.status === "success") {
-                        alert("Grazie! Abbiamo ricevuto il tuo RSVP.");
-                        document.getElementById("rsvp-form").reset();
-                    } else {
-                        alert("Errore: " + JSON.stringify(json));
+                        if (json.status === "success") {
+                            alert("Grazie! Abbiamo ricevuto il tuo RSVP.");
+                            document.getElementById("rsvp-form").reset();
+                        } else if (json.reason === "recaptcha_failed") {
+                            alert("Errore reCAPTCHA, per favore riprova.");
+                        } else {
+                            alert("Errore imprevisto: " + JSON.stringify(json));
+                        }
+
+                    } catch (err) {
+                        console.error(err);
+                        alert("Errore di connessione.");
                     }
-
-                } catch (err) {
-                    console.error(err);
-                    alert("Errore di connessione");
-                }
-
-            });
+                });
         });
     });
 </script>
