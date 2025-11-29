@@ -1,31 +1,14 @@
-<!-- rsvp.html - incolla nel tuo sito Jekyll -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400&display=swap">
-
-<style>
-    /* (il CSS è lo stesso che hai già — lo ripeto per completezza) */
-    body { font-family: "Inter", sans-serif; background: #faf9f5; padding: 20px; }
-    .form-container { max-width: 500px; margin: auto; background: #fff; padding: 35px 32px; border-radius: 16px; box-shadow: 0 4px 22px rgba(0,0,0,0.08); animation: fadeIn 0.6s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-    h2 { text-align: center; font-family: "Playfair Display", serif; font-weight: 400; font-size: 28px; margin-bottom: 18px; }
-    .floating-label { position: relative; margin-bottom: 22px; }
-    .floating-label input, .floating-label textarea, .floating-label select { width: 100%; border: 1px solid #ddd; padding: 14px 12px; border-radius: 10px; font-size: 1rem; background: #fcfcfc; transition: border-color .25s, box-shadow .25s; }
-    .floating-label input:focus, .floating-label textarea:focus, .floating-label select:focus { border-color: #bca98c; box-shadow: 0 0 0 3px rgba(188,169,140,0.25); outline: none; }
-    .floating-label label { position: absolute; top: 14px; left: 12px; color: #888; pointer-events: none; transition: all .22s ease; }
-    .floating-label input:focus + label, .floating-label input:not(:placeholder-shown) + label, .floating-label textarea:focus + label, .floating-label textarea:not(:placeholder-shown) + label, .floating-label select:focus + label, .floating-label select:not([value=""]) + label { top: -8px; left: 8px; font-size: 0.8rem; background: #fff; padding: 0 4px; color: #b79a78; }
-    button { width: 100%; padding: 15px; background: #111; color: #fff; border: none; border-radius: 10px; font-size: 1rem; cursor: pointer; transition: transform .15s, background .2s; }
-    button:hover { transform: scale(1.02); background: #333; }
-    button:active { transform: scale(0.97); }
-    #result { text-align: center; margin-top: 20px; font-weight: 500; }
-    #result.success { color: #6aa583; animation: fadeUp .4s ease; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-</style>
+---
+layout: default
+title: RSVP
+---
 
 <div class="form-container">
     <h2>RSVP</h2>
 
     <form id="rsvp-form">
 
-        <!-- STEP 1 ---------------------------- -->
+        <!-- STEP 1 -->
         <div class="step active" id="step-1">
             <h3 class="step-title">General Information</h3>
 
@@ -39,14 +22,16 @@
                 <label>Surname*</label>
             </div>
 
-            <div class="floating-label phone-row">
-                <input type="text" id="prefix" name="prefix" required placeholder=" " pattern="[0-9+() ]+"/>
-                <label>Prefix*</label>
-            </div>
+            <div class="phone-row">
+                <div class="floating-label">
+                    <input type="text" id="prefix" name="prefix" required placeholder=" " pattern="[0-9+() ]+" />
+                    <label>Prefix*</label>
+                </div>
 
-            <div class="floating-label">
-                <input type="text" id="telefono" name="telefono" required placeholder=" " pattern="[0-9+() ]+"/>
-                <label>Phone number*</label>
+                <div class="floating-label">
+                    <input type="text" id="telefono" name="telefono" required placeholder=" " pattern="[0-9+() ]+" />
+                    <label>Phone number*</label>
+                </div>
             </div>
 
             <div class="floating-label">
@@ -57,7 +42,7 @@
             <button type="button" class="next-btn">Next</button>
         </div>
 
-        <!-- STEP 2 ---------------------------- -->
+        <!-- STEP 2 -->
         <div class="step" id="step-2">
             <h3 class="step-title">Travel information</h3>
 
@@ -84,7 +69,7 @@
             <button type="button" class="next-btn">Next</button>
         </div>
 
-        <!-- STEP 3 ---------------------------- -->
+        <!-- STEP 3 -->
         <div class="step" id="step-3">
             <h3 class="step-title">Food information</h3>
 
@@ -124,7 +109,7 @@
             <button type="button" class="next-btn">Next</button>
         </div>
 
-        <!-- STEP 4 ---------------------------- -->
+        <!-- STEP 4 -->
         <div class="step" id="step-4">
             <h3 class="step-title">Others</h3>
 
@@ -144,16 +129,23 @@
     <div id="thankyou-animation"></div>
 </div>
 
+<!-- reCAPTCHA -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LfSNhosAAAAAAGFpMX5do3nDtl8ImAYIgpHLV8k
+"></script>
 
-<!-- reCAPTCHA v3 -->
-<script src="https://www.google.com/recaptcha/api.js?render=6Lf4GRssAAAAAJj23-q_uwVdPT-t6xXs5zhR5kWi"></script>
-
+<!-- Confetti -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
-    const ENDPOINT = "https://script.google.com/macros/s/AKfycbzj7Y1IFJ5VMvaI9Ip0SYGR2w0n8C0rmhOB27Mk1aNX4TckVDI2KH4tvBaJzuA95F1s/exec"; // <-- aggiorna con il tuo URL
+    /* ======================
+       CONFIG
+    ====================== */
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbzcQGQ60WkODHxLqcFzYCBgAkc_aUh_KFu51JJVJbH-zQL-un5v18X3FuaQVipb6Uuj/exec";
+    const SITE_KEY = "6LfSNhosAAAAAAGFpMX5do3nDtl8ImAYIgpHLV8k";
 
-    // Multi-step logic
+    /* ======================
+       MULTISTEP LOGIC
+    ====================== */
     let currentStep = 1;
     const steps = document.querySelectorAll(".step");
 
@@ -163,91 +155,86 @@
         currentStep = n;
     }
 
-    document.querySelectorAll(".next-btn").forEach(btn => {
-        btn.addEventListener("click", () => showStep(currentStep + 1));
-    });
+    document.addEventListener("DOMContentLoaded", () => showStep(1));
 
-    document.querySelectorAll(".back-btn").forEach(btn => {
-        btn.addEventListener("click", () => showStep(currentStep - 1));
-    });
+    document.querySelectorAll(".next-btn").forEach(btn =>
+        btn.addEventListener("click", () => showStep(currentStep + 1))
+    );
 
-    // Allergie/dieta toggle
-    document.getElementById("allergie").addEventListener("change", e => {
-        document.getElementById("allergieField").style.display = e.target.value === "Yes" ? "block" : "none";
-    });
+    document.querySelectorAll(".back-btn").forEach(btn =>
+        btn.addEventListener("click", () => showStep(currentStep - 1))
+    );
 
-    document.getElementById("dieta").addEventListener("change", e => {
-        document.getElementById("dietaField").style.display = e.target.value === "Yes" ? "block" : "none";
-    });
+    /* Toggle campi allergie/dieta */
+    document.getElementById("allergie").addEventListener("change", e =>
+        document.getElementById("allergieField").style.display =
+            e.target.value === "Yes" ? "block" : "none"
+    );
+    document.getElementById("dieta").addEventListener("change", e =>
+        document.getElementById("dietaField").style.display =
+            e.target.value === "Yes" ? "block" : "none"
+    );
 
-    // Count characters
-    document.getElementById("messaggio").addEventListener("input", function() {
+    /* Contatore caratteri */
+    document.getElementById("messaggio").addEventListener("input", function () {
         document.getElementById("char-count").textContent = this.value.length + "/500";
     });
 
-    // reCAPTCHA
-    document.getElementById("rsvp-form").addEventListener("submit", function(e) {
+    /* ======================
+       SUBMIT + RECAPTCHA
+    ====================== */
+    document.getElementById("rsvp-form").addEventListener("submit", function (e) {
         e.preventDefault();
 
         grecaptcha.ready(() => {
-            grecaptcha.execute("6Lf4GRssAAAAAJj23-q_uwVdPT-t6xXs5zhR5kWi", {action: "submit"})
-                .then(async token => {
+            grecaptcha.execute(SITE_KEY, { action: "submit" }).then(async token => {
+                const params = new URLSearchParams();
 
-                    const params = new URLSearchParams();
-                    params.append("nome", document.getElementById("nome").value);
-                    params.append("cognome", document.getElementById("cognome").value);
-                    params.append("prefix", document.getElementById("prefix").value);
-                    params.append("telefono", document.getElementById("telefono").value);
-                    params.append("email", document.getElementById("email").value);
-                    params.append("arrivo", document.getElementById("arrivo").value);
-                    params.append("shuttle", document.getElementById("shuttle").value);
-                    params.append("allergie", document.getElementById("allergie").value);
-                    params.append("listaAllergie", document.getElementById("listaAllergie").value);
-                    params.append("dieta", document.getElementById("dieta").value);
-                    params.append("tipoDieta", document.getElementById("tipoDieta").value);
-                    params.append("messaggio", document.getElementById("messaggio").value);
-                    params.append("token", token);
+                const fields = [
+                    "nome","cognome","prefix","telefono","email",
+                    "arrivo","shuttle","allergie","listaAllergie",
+                    "dieta","tipoDieta","messaggio"
+                ];
 
-                    try {
-                        const res = await fetch(ENDPOINT, {
-                            method: "POST",
-                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                            body: params.toString()
-                        });
+                fields.forEach(f => params.append(f, document.getElementById(f)?.value || ""));
+                params.append("token", token);
 
-                        const json = await res.json();
+                try {
+                    const res = await fetch(ENDPOINT, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        body: params.toString()
+                    });
 
-                        if (json.status === "success") {
-                            launchConfetti();
-                            showStep(1);
-                            document.getElementById("rsvp-form").reset();
-                            alert("Grazie! Il tuo RSVP è stato inviato.");
-                        } else {
-                            alert("Errore: " + JSON.stringify(json));
-                        }
+                    const json = await res.json();
 
-                    } catch (err) {
-                        console.error(err);
-                        alert("Errore di connessione.");
+                    if (json.status === "success") {
+                        launchConfetti();
+                        showStep(1);
+                        document.getElementById("rsvp-form").reset();
+                        alert("Grazie! Il tuo RSVP è stato inviato.");
+                    } else {
+                        alert("Errore: " + JSON.stringify(json));
                     }
-                });
+
+                } catch (err) {
+                    console.error(err);
+                    alert("Errore di connessione.");
+                }
+            });
         });
     });
 
-    // Confetti
+    /* ======================
+       CONFETTI
+    ====================== */
     function launchConfetti() {
-        var duration = 1.5 * 1000;
+        var duration = 1500;
         var end = Date.now() + duration;
 
         (function frame() {
-            confetti({
-                particleCount: 5,
-                spread: 70
-            });
-
-            if (Date.now() < end) {
-                requestAnimationFrame(frame);
-            }
+            confetti({ particleCount: 5, spread: 60 });
+            if (Date.now() < end) requestAnimationFrame(frame);
         })();
     }
 </script>

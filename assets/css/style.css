@@ -265,6 +265,7 @@ main {
     transform: translateY(0);
 }
 
+
 .step-title {
     font-family: "Playfair Display", serif;
     font-size: 22px;
@@ -284,3 +285,118 @@ main {
     margin-top: 20px;
     min-height: 30px;
 }
+
+
+/* ========================= */
+/* RSVP FORM — MULTISTEP     */
+/* ========================= */
+
+.form-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 35px 32px;
+    border-radius: 16px;
+    box-shadow: 0 4px 22px rgba(0,0,0,0.08);
+}
+
+.step {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .35s ease, transform .35s ease;
+}
+
+.step.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.step-title {
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+/* Floating labels */
+.floating-label {
+    position: relative;
+    margin-bottom: 22px;
+}
+
+.floating-label input,
+.floating-label textarea,
+.floating-label select {
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 14px 12px;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: #fcfcfc;
+}
+
+.floating-label input:focus,
+.floating-label textarea:focus,
+.floating-label select:focus {
+    border-color: #bca98c;
+    box-shadow: 0 0 0 3px rgba(188,169,140,0.25);
+    outline: none;
+}
+
+.floating-label label {
+    position: absolute;
+    top: 14px;
+    left: 12px;
+    color: #888;
+    pointer-events: none;
+    transition: all .22s ease;
+}
+
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label,
+.floating-label textarea:focus + label,
+.floating-label textarea:not(:placeholder-shown) + label,
+.floating-label select:focus + label,
+.floating-label select:not([value=""]) + label {
+    top: -8px;
+    left: 8px;
+    font-size: 0.8rem;
+    background: #fff;
+    padding: 0 4px;
+    color: #b79a78;
+}
+
+/* Buttons */
+.next-btn,
+.back-btn,
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: #111;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 1rem;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: transform .15s, background .2s;
+}
+
+.next-btn:hover,
+.back-btn:hover,
+.submit-btn:hover {
+    transform: scale(1.02);
+    background: #333;
+}
+
+.phone-row {
+    display: flex;
+    gap: 12px;
+}
+
+#char-count {
+    text-align: right;
+    font-size: 0.85rem;
+    color: #777;
+}
+
