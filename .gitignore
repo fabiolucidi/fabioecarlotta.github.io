@@ -4,3 +4,4 @@ _site
 .jekyll-metadata
 vendor
 #index.md
+_layouts/default.html

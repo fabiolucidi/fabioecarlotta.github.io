@@ -1,0 +1,35 @@
+<section id="story" class="story-section" style="max-width:800px;margin:0 auto;padding:2rem 1rem;line-height:1.6;font-family:sans-serif;">
+    <!-- Auto-rotating Gallery -->
+    <div class="story-gallery" style="position:relative;width:100%;height:300px;overflow:hidden;border-radius:12px;margin-bottom:1.5rem;">
+        <img src="/assets/img/flower.jpg" class="story-slide" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity 1s;" />
+        <img src="/assets/img/background.jpg" class="story-slide" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s;" />
+        <img src="/assets/img/qa.jpg" class="story-slide" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s;" />
+    </div>
+
+    <script>
+        // Simple auto-rotation (no controls)
+        document.addEventListener("DOMContentLoaded", () => {
+            const slides = document.querySelectorAll('.story-slide');
+            let index = 0;
+            setInterval(() => {
+                slides[index].style.opacity = 0;
+                index = (index + 1) % slides.length;
+                slides[index].style.opacity = 1;
+            }, 4000);
+        });
+    </script>
+
+    <!-- Placeholder Text -->
+    <div class="default-text">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Curabitur ut luctus erat.</p>
+        <p>Sed vitae tortor tempus, tincidunt lacus in, viverra nisl. Suspendisse potenti.</p>
+        <p>Donec feugiat, justo non fermentum venenatis, mauris lorem hendrerit odio, ac faucibus est urna at ligula.</p>
+        <p>Nunc ac turpis ac sapien placerat finibus. Fusce vitae tincidunt lorem.</p>
+        <p>Vivamus dictum libero id nisl accumsan, vitae fermentum erat gravida.</p>
+        <p>Integer sed erat pretium, iaculis ex in, pulvinar enim.</p>
+        <p>Praesent in orci id orci gravida ultricies ac a sapien.</p>
+        <p>Aliquam erat volutpat. Cras suscipit lectus et neque hendrerit, in fermentum massa blandit.</p>
+        <p>Morbi dapibus orci non ligula pharetra, nec dignissim sem porta.</p>
+        <p>Curabitur nec nulla vitae urna hendrerit blandit in sed erat.</p>
+    </div>
+</section>

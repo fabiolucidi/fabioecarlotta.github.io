@@ -1,0 +1,230 @@
+{% comment %}
+Sezione "Where To Stay"
+- 3 card affiancate con flip automatico
+- Dati da _data/stays.yml
+- Mappa Leaflet con pin personalizzati
+{% endcomment %}
+
+<section id="where-to-stay" class="where-section" style="max-width:1000px;margin:0 auto;padding:2rem 1rem;line-height:1.6;font-family:sans-serif;">
+
+    <!-- Intro Text -->
+    <div class="intro" style="margin-bottom:2rem;">
+        <h2 style="text-align:center;margin-bottom:1rem;">Where to Stay</h2>
+        <p>Abbiamo selezionato alcune strutture nelle vicinanze. Scorri le card per scoprire hotel, agriturismi e Airbnb consigliati.</p>
+    </div>
+
+    <!-- 3-CARD ROTATOR -->
+    <div id="accommodation-rotator"
+         style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:2rem;">
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            /* 1. Import stays */
+            const stays = [
+                {% for stay in site.data.stays %}
+            {
+                name: {{ stay.name | jsonify }},
+                img: {{ stay.img | jsonify }},
+                description: {{ stay.description | jsonify }},
+                link: {{ stay.link | jsonify }}
+            }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+        ];
+
+            const COLS = 3;
+            const buckets = [[],[],[]];
+
+            stays.forEach((stay, i) => buckets[i % COLS].push(stay));
+
+            const container = document.getElementById("accommodation-rotator");
+            const cards = [];
+
+            function buildHTML(stay, linkLabel) {
+                return `
+      <img src="${stay.img}" style="width:100%;height:200px;object-fit:cover;">
+      <div style="padding:1rem;">
+        <h3 style="margin:0 0 0.5rem;font-size:1.05rem;font-weight:600;">${stay.name}</h3>
+        <p style="margin:0 0 0.6rem;font-size:0.9rem;">${stay.description}</p>
+        <a href="${stay.link}" target="_blank"
+           style="color:#0066cc;font-weight:600;text-decoration:none;">${linkLabel} →</a>
+      </div>`;
+            }
+
+            buckets.forEach((bucket) => {
+                const card = document.createElement("div");
+                card.style.cssText = `
+      position:relative;
+      width:100%;
+      height:330px;
+      perspective:1000px;
+    `;
+
+                const inner = document.createElement("div");
+                inner.style.cssText = `
+      width:100%; height:100%;
+      position:relative;
+      transform-style:preserve-3d;
+      transition:transform 0.6s ease;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 4px 12px rgba(0,0,0,.12);
+      backface-visibility: hidden;
+    `;
+
+                const front = document.createElement("div");
+                const back  = document.createElement("div");
+
+                front.style.cssText = `
+      position:absolute; inset:0;
+      backface-visibility:hidden;
+      background:white;
+      display:flex; flex-direction:column;
+    `;
+
+                back.style.cssText = `
+      position:absolute; inset:0;
+      backface-visibility:hidden;
+      transform:rotateY(180deg);
+      background:#f7f7f7;
+      display:flex; flex-direction:column;
+      justify-content:center; align-items:center;
+      text-align:center;
+    `;
+
+                inner.appendChild(front);
+                inner.appendChild(back);
+                card.appendChild(inner);
+                container.appendChild(card);
+
+                cards.push({
+                    bucket,
+                    front,
+                    back,
+                    inner,
+                    index: 0,
+                    flipped: false
+                });
+            });
+
+            /* Initialize content */
+            cards.forEach(c => {
+                c.front.innerHTML = buildHTML(c.bucket[0], "Visita");
+                if (c.bucket.length > 1)
+                    c.back.innerHTML = buildHTML(c.bucket[1], "Apri sito");
+                else
+                    c.back.innerHTML = c.front.innerHTML;
+            });
+
+            /* Flip rotation */
+            setInterval(() => {
+                cards.forEach(c => {
+                    c.flipped = !c.flipped;
+
+                    c.index = (c.index + 1) % c.bucket.length;
+                    const nextStay = c.bucket[c.index];
+
+                    if (c.flipped) {
+                        c.back.innerHTML = buildHTML(nextStay, "Apri sito");
+                    } else {
+                        c.front.innerHTML = buildHTML(nextStay, "Visita");
+                    }
+
+                    c.inner.style.transform = c.flipped
+                        ? "rotateY(180deg)"
+                        : "rotateY(0deg)";
+                });
+            }, 5000);
+
+        });
+    </script>
+
+    <!-- MAPPA LEAFLET -->
+    <h3 style="margin-top:3rem;">Mappa degli alloggi (Leaflet)</h3>
+
+    <div id="leaflet-map" style="width:100%; height:400px; border-radius:12px; overflow:hidden;"></div>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const map = L.map('leaflet-map').setView([45.44, 10.99], 12);
+
+            const baseTiles = L.tileLayer(
+                'https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+                {
+                    maxZoom: 19,
+                    attribution: '© CARTO © OpenStreetMap contributors'
+                }
+            ).addTo(map);
+
+            const markers = L.featureGroup().addTo(map);
+
+            const svgIcon = L.divIcon({
+                html: `
+          <svg width="32" height="48" viewBox="0 0 32 48">
+            <path d="M16 0C7 0 0 7 0 16c0 12 16 32 16 32s16-20 16-32C32 7 25 0 16 0z" fill="#4A78C2"/>
+            <circle cx="16" cy="16" r="6" fill="white"/>
+          </svg>
+        `,
+                className: "custom-pin",
+                iconSize: [32, 48],
+                iconAnchor: [16, 48],
+                popupAnchor: [0, -40]
+            });
+
+            const staysMap = [
+                {% for stay in site.data.stays %}
+            {
+                name: {{ stay.name | jsonify }},
+                img: {{ stay.img | jsonify }},
+                description: {{ stay.description | jsonify }},
+                link: {{ stay.link | jsonify }},
+                lat: {{ stay.lat }},
+                lng: {{ stay.lng }}
+            }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+        ];
+
+            staysMap.forEach(stay => {
+                const popupHTML = `
+          <div style="text-align:center; width:180px;">
+            <img src="${stay.img}" style="width:100%; border-radius:8px; margin-bottom:6px;">
+            <h4 style="margin:4px 0;">${stay.name}</h4>
+            <p style="font-size:0.85rem;">${stay.description}</p>
+            <a href="${stay.link}" target="_blank" style="font-weight:bold; color:#0077cc;">Visita →</a>
+          </div>
+        `;
+
+                L.marker([stay.lat, stay.lng], { icon: svgIcon })
+                    .addTo(markers)
+                    .bindPopup(popupHTML);
+            });
+
+            if (staysMap.length) {
+                map.fitBounds(markers.getBounds(), { padding: [30, 30] });
+            }
+        });
+    </script>
+
+</section>
+
+<!-- CSS opzionale aggiuntivo (puoi spostarlo in style.css) -->
+<style>
+    @media (max-width: 900px) {
+        #accommodation-rotator {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 600px) {
+        #accommodation-rotator {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

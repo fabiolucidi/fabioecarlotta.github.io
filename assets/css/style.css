@@ -427,3 +427,25 @@ main {
     display: inline-block;
 
 }
+
+.default-text {
+    font-family:Raleway, serif;
+}
+
+.stay-card:hover img {
+    transform: scale(1.05);
+}
+
+
+#leaflet-map .leaflet-popup-content {
+    margin: 0 !important;
+}
+
+#leaflet-map .leaflet-popup-content-wrapper {
+    border-radius: 12px;
+    padding: 0;
+}
+
+#leaflet-map .leaflet-popup-tip {
+    background: white;
+}

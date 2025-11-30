@@ -1,0 +1,34 @@
+- name: Agriturismo Case Vecie
+  img: /assets/img/background.jpg
+  description: Agriturismo immerso nelle colline veronesi.
+  link: https://example.com
+  lat: 45.5315
+  lng: 11.0452
+
+- name: Ponte di Castelvecchio
+  img: /assets/img/where.jpg
+  description: Storico ponte medievale sul fiume Adige.
+  link: https://example.com
+  lat: 45.4411
+  lng: 10.9878
+
+- name: Arena di Verona
+  img: /assets/img/flower.jpg
+  description: Il celebre anfiteatro romano, simbolo della città.
+  link: https://example.com
+  lat: 45.4397
+  lng: 10.9943
+
+- name: Piazza delle Erbe
+  img: /assets/img/flower.jpg
+  description: Storica piazza del centro, ricca di vita e colori.
+  link: https://example.com
+  lat: 45.4431
+  lng: 10.9971
+
+- name: Liceo Maffei
+  img: /assets/img/background.jpg
+  description: Storico liceo classico veronese.
+  link: https://example.com
+  lat: 45.4422
+  lng: 10.9979
