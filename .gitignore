@@ -3,5 +3,6 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
-#index.md
 _layouts/default.html
+_layouts
+#index.md
