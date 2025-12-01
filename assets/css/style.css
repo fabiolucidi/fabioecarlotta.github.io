@@ -241,6 +241,23 @@ main {
     transition: all .3s ease;
 }
 
+.section-std {
+    max-width: 80%;
+    margin:0 auto;
+    padding:2rem 1rem;
+    line-height:1.6;
+    font-family:sans-serif;
+}
+
+.default-title h2
+{
+    font-family: Alice, sans-serif;
+    text-align:center;
+    margin-bottom:2rem;
+    font-weight: 400;
+    font-size: 200%;
+}
+
 /* Stato “fissato” – verrà aggiunta la classe .fixed via JS */
 #navbar.fixed {
     position: fixed;
@@ -430,6 +447,7 @@ main {
 
 .default-text {
     font-family:Raleway, serif;
+    margin-bottom: 1rem;
 }
 
 .stay-card:hover img {
@@ -448,4 +466,8 @@ main {
 
 #leaflet-map .leaflet-popup-tip {
     background: white;
+}
+
+.swiper-container {
+    overflow: hidden; /* Mostra solo le 3 card centrali */
 }
