@@ -1,0 +1,144 @@
+{% comment %}
+Sezione "Where To Stay"
+Carosello Swiper.js a 3 card (scorrimento classico)
+{% endcomment %}
+
+<section id="where-to-stay" class="section-std">
+
+    <!-- Intro -->
+    <div class="default-title">
+        <h2>Where to Stay</h2>
+        <p class="default-text">
+            Life has brought incredible people into our path — some from nearby, others from all around the world.
+            For those who may not be familiar with the city of Verona, we’ve put together a few suggestions on where to stay and what to explore during your time here.
+        </p>
+
+    </div>
+
+
+    <!-- SWIPER WRAPPER -->
+    <div class="swiper-container" style="padding-bottom:40px;">
+        <div class="swiper-wrapper">
+
+            {% for stay in site.data.stays %}
+            <div class="swiper-slide" style="height:auto;">
+                <div style="
+                    background:white;
+                    border-radius:14px;
+                    overflow:hidden;
+                    box-shadow:0 4px 12px rgba(0,0,0,.15);
+                    height:100%;
+                    display:flex;
+                    flex-direction:column;">
+
+                    <img src="{{ stay.img }}" style="width:100%;height:200px;object-fit:cover;">
+
+                    <div style="padding:1rem;">
+                        <h3 style="margin:0 0 0.5rem;font-size:1.05rem;font-weight:600;">
+                            {{ stay.name }}
+                        </h3>
+
+                        <p style="font-size:0.9rem;margin:0 0 0.5rem;">
+                            {{ stay.description }}
+                        </p>
+
+                        <a href="{{ stay.link }}" target="_blank"
+                           style="color:#0066cc;font-weight:bold;text-decoration:none;">
+                            Visita →
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <!-- SWIPER CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- SWIPER INIT -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            new Swiper('.swiper-container', {
+                slidesPerView: 3,
+                spaceBetween: 20,
+                loop: true,
+                autoplay: {
+                    delay: 3500,
+                    disableOnInteraction: false
+                },
+                speed: 600,
+                grabCursor: true,
+
+                breakpoints: {
+                    900: { slidesPerView: 3 },
+                    600: { slidesPerView: 2 },
+                    0:   { slidesPerView: 1 }
+                }
+            });
+        });
+    </script>
+
+
+    <!-- MAPPA LEAFLET -->
+
+    <div id="leaflet-map" style="width:100%; height:400px; border-radius:12px; overflow:hidden;"></div>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const map = L.map('leaflet-map').setView([45.44, 10.99], 12);
+
+            L.tileLayer(
+                'https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+                { maxZoom: 19 }
+            ).addTo(map);
+
+            const markers = L.featureGroup().addTo(map);
+
+            const icon = L.divIcon({
+                html: `
+                <svg width="32" height="48" viewBox="0 0 32 48">
+                    <path d="M16 0C7 0 0 7 0 16c0 12 16 32 16 32s16-20 16-32C32 7 25 0 16 0z" fill="#4A78C2"/>
+                    <circle cx="16" cy="16" r="6" fill="white"/>
+                </svg>
+            `,
+                className:"", iconSize:[32,48], iconAnchor:[16,48]
+            });
+
+            const staysMap = [
+                {% for stay in site.data.stays %}
+            {
+                name: {{ stay.name | jsonify }},
+                img: {{ stay.img | jsonify }},
+                description: {{ stay.description | jsonify }},
+                link: {{ stay.link | jsonify }},
+                lat: {{ stay.lat }},
+                lng: {{ stay.lng }}
+            }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+        ];
+
+            staysMap.forEach(s => {
+                L.marker([s.lat, s.lng], { icon })
+                    .addTo(markers)
+                    .bindPopup(`
+                    <div style="text-align:center; width:180px;">
+                        <img src="${s.img}" style="width:100%; border-radius:8px; margin-bottom:6px;">
+                        <h4>${s.name}</h4>
+                        <p style="font-size:0.85rem;">${s.description}</p>
+                        <a href="${s.link}" target="_blank" style="font-weight:bold; color:#0077cc;">Visita →</a>
+                    </div>
+                `);
+            });
+
+            if (staysMap.length) map.fitBounds(markers.getBounds(), { padding: [20,20] });
+        });
+    </script>
+
+</section>

@@ -1,10 +1,9 @@
 title: "Fabio & Carlotta"
-baseurl: "" # se lo metti su GitHub Pages tipo /fabioecarlotta aggiorna questo
-url: "https://www.fabioecarlotta.it"     # es. https://tuodominio.it
+baseurl: ""
+url: "https://www.fabioecarlotta.it"
 markdown: kramdown
 theme: null
 
-# Dati che puoi riusare nei template
 wedding:
   couple_names: "Fabio & Carlotta"
   date: "20th of June 2026"
@@ -12,7 +11,16 @@ wedding:
   location_line2: "Romagnano di Valpantena, Verona"
   rsvp_link: ""
 
-# Dati Repository Github
-github_username:  fabiolucidi
+github_username: fabiolucidi
 repository: fabiolucidi/fabioecarlotta.github.io
 repo_url: https://github.com/fabiolucidi/fabioecarlotta.github.io
+
+plugins:
+  - jekyll-polyglot
+
+polyglot:
+  default_lang: "en"
+  languages: ["it", "en"]
+  exclude_from_localization: ["assets", "css", "img", "js"]
+  unlocalized_pages:
+    - _posts/*

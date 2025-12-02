@@ -1,0 +1,43 @@
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const header = document.getElementById("navbar");
+
+        function getHeaderHeight() {
+            return header ? header.offsetHeight : 0;
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener("click", function (e) {
+                const href = this.getAttribute("href");
+                if (!href || href === "#") return;
+
+                const targetId = href.substring(1);
+                const target = document.getElementById(targetId);
+                if (!target) return;
+
+                e.preventDefault();
+
+                /* 1) Forza la navbar a rientrare in stato "fixed" */
+                header.classList.add("fixed");
+
+                /* 2) Aspetta un frame per permettere al browser di aggiornare l’altezza */
+                requestAnimationFrame(() => {
+                    const headerHeight = getHeaderHeight();
+                    const extraSpace = 16;
+
+                    const targetY =
+                        target.getBoundingClientRect().top +
+                        window.scrollY -
+                        headerHeight -
+                        extraSpace;
+
+                    /* 3) Ora che la navbar è fissa → scroll perfetto */
+                    window.scrollTo({
+                        top: targetY,
+                        behavior: "smooth"
+                    });
+                });
+            });
+        });
+    });
+</script>
