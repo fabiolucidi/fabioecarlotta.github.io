@@ -15,12 +15,3 @@ github_username: fabiolucidi
 repository: fabiolucidi/fabioecarlotta.github.io
 repo_url: https://github.com/fabiolucidi/fabioecarlotta.github.io
 
-plugins:
-  - jekyll-polyglot
-
-polyglot:
-  default_lang: "en"
-  languages: ["it", "en"]
-  exclude_from_localization: ["assets", "css", "img", "js"]
-  unlocalized_pages:
-    - _posts/*

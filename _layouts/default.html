@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang }}">
+<html lang="{{ page.lang | default: 'it' }}">
   <head>
     <meta charset="UTF-8" />
     <title>{{ page.title | default: site.title }}</title>
@@ -27,25 +27,16 @@
       <script src="{{ '/assets/js/navbar.js' | relative_url }}"></script>
   </head>
   <body>
-  <div class="language-switcher">
-      {% for lang in site.languages %}
-      {% if lang == page.lang %}
-      <span class="current">{{ lang | upcase }}</span>
-      {% else %}
-      <a href="/{{ lang }}{{ page.url_no_lang }}">{{ lang | upcase }}</a>
-      {% endif %}
-      {% endfor %}
-  </div>
 
   {% include header.html %}
 
     <main>
       {{ content }}
-        {% include story.{{ page.lang }}.html %}
-        {% include whwh.{{ page.lang }}.html %}
-        {% include rsvp.{{ page.lang }}.html %}
-        {% include where.{{ page.lang }}.html %}
-        {% include qa.{{ page.lang }}.html %}
+        {% include {{ page.lang }}/story.html %}
+        {% include {{ page.lang }}/whwh.html %}
+        {% include {{ page.lang }}/rsvp.html %}
+        {% include {{ page.lang }}/where.html %}
+        {% include {{ page.lang }}/qa.html %}
 
 
     </main>
