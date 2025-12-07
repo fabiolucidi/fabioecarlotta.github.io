@@ -586,6 +586,6 @@ main {
     z-index: 9999 !important;
     bottom: 8px !important;
     right: 8px !important;
-    transform: scale(0.75); /* riduce la dimensione */
-    opacity: 0.55;         /* lo rende meno invadente (ma visibile) */
+    transform: scale(0.01); /* riduce la dimensione */
+    opacity: 0.95;         /* lo rende meno invadente (ma visibile) */
 }
