@@ -2,42 +2,42 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html,
 body {
-  height: 100%;
+    height: 100%;
 }
 
 body {
-  font-family: "Raleway", system-ui, sans-serif;
-  background-color: #ffffff;
-  color: #333333;
-  line-height: 1.6;
+    font-family: "Raleway", system-ui, sans-serif;
+    background-color: #ffffff;
+    color: #333333;
+    line-height: 1.6;
 }
 
 /* Layout generale */
 main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
 }
 
 /* Header + Nav */
 .site-header {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 0;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 0;
 }
 
 .nav-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
 
 }
 
@@ -48,10 +48,10 @@ main {
 }
 
 .brand a {
-  font-size: 4rem;
-  text-decoration: none;
-  color: #333333;
-  letter-spacing: 0.04em;
+    font-size: 4rem;
+    text-decoration: none;
+    color: #333333;
+    letter-spacing: 0.04em;
 }
 
 .site-nav,
@@ -68,32 +68,32 @@ main {
 }
 
 .site-nav {
-  max-width: 60%;
-  margin: 0 auto;        /* centra il blocco .site‑nav nel suo contenitore */
-  text-align: center;    /* centra il testo dei link */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  font-size: 0.95rem;
+    max-width: 60%;
+    margin: 0 auto;        /* centra il blocco .site‑nav nel suo contenitore */
+    text-align: center;    /* centra il testo dei link */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.95rem;
 }
 
 .site-nav a {
-  text-decoration: none;
-  color: #444444;
-  position: relative;
-  padding-bottom: 0.25rem;
+    text-decoration: none;
+    color: #444444;
+    position: relative;
+    padding-bottom: 0.25rem;
 }
 
 .site-nav a:hover::after,
 .site-nav a:focus::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
-  background-color: #333333;
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #333333;
 }
 
 
@@ -102,47 +102,47 @@ main {
               font-optical-sizing: auto;
               font-weight: <weight>;
               font-style: normal;
-}
+          }
 
 
 /* Hero split */
 .hero {
-  display: flex;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  /* gap: 3rem; */
-  align-items: center;
-  /* padding: 3rem 0 4rem; */
-  border-bottom: 1px solid #f0f0f0;
-  justify-content: center;
-  margin: 0 auto;
+    display: flex;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    /* gap: 3rem; */
+    align-items: center;
+    /* padding: 3rem 0 4rem; */
+    border-bottom: 1px solid #f0f0f0;
+    justify-content: center;
+    margin: 0 auto;
 }
 
 .hero-text {
-  justify-content: center;
-  /*padding-right: 2rem; */
-  text-align: center;
+    justify-content: center;
+    /*padding-right: 2rem; */
+    text-align: center;
 }
 
 .hero-date {
-  font-size: 2rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
-  color: #777777;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    color: #777777;
 }
 
 .hero h1 {
     font-family: "Alice", serif;
     font-size: 3.3rem;
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  margin-bottom: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.8rem;
 }
 
 .hero-location {
-  font-size: 1.5rem;
-  color: #555555;
-  margin-bottom: 0.25rem;
+    font-size: 1.5rem;
+    color: #555555;
+    margin-bottom: 0.25rem;
 }
 
 .hero-location2 {
@@ -152,84 +152,84 @@ main {
 }
 
 .btn-primary {
-  display: inline-block;
-  padding: 0.65rem 1.6rem;
-  border-radius: 999px;
-  border: 1px solid #374936;
-  text-decoration: none;
-  color: #374936;
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+    display: inline-block;
+    padding: 0.65rem 1.6rem;
+    border-radius: 999px;
+    border: 1px solid #374936;
+    text-decoration: none;
+    color: #374936;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 /* Immagine fiore */
 .hero-image {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: center;
 }
 
 .hero-image img {
-  max-width: 35%;
-  height: auto;
+    max-width: 35%;
+    height: auto;
 }
 
 /* Sezioni interne */
 .section {
-  padding: 4rem 0;
-  border-bottom: 1px solid #f3f3f3;
-  text-align: center;
+    padding: 4rem 0;
+    border-bottom: 1px solid #f3f3f3;
+    text-align: center;
 }
 
 .section h2 {
-  font-family: "Alice", serif;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.04em;
+    font-family: "Alice", serif;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.04em;
 }
 
 .section p {
-  max-width: 80%;
-  font-size: 1rem;
-  text-align: center;
-  margin: 0 auto;
+    max-width: 80%;
+    font-size: 1rem;
+    text-align: center;
+    margin: 0 auto;
 }
 
 /* Footer */
 .site-footer {
-  border-top: 1px solid #f3f3f3;
-  padding: 2rem 1.5rem 3rem;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #777777;
+    border-top: 1px solid #f3f3f3;
+    padding: 2rem 1.5rem 3rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #777777;
 }
 
 /* Mobile */
 @media (max-width: 800px) {
-  .nav-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
 
-  .hero {
-    grid-template-columns: 1fr;
-  }
+    .hero {
+        grid-template-columns: 1fr;
+    }
 
-  .hero-text {
-    padding-right: 0;
-  }
+    .hero-text {
+        padding-right: 0;
+    }
 
-  .hero h1 {
-    font-size: 2.4rem;
-  }
+    .hero h1 {
+        font-size: 2.4rem;
+    }
 
-  .site-nav {
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
+    .site-nav {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
 }
 
 
@@ -509,4 +509,29 @@ main {
     color: #000;
     font-weight: 700;
     text-decoration: underline;
+}
+
+
+/* ================================
+   MOBILE NAV FIXES
+   ================================ */
+@media (max-width: 600px) {
+
+    /* Logo più piccolo */
+    .brand a {
+        font-size: 2.6rem;
+    }
+
+    /* Nav più compatta */
+    .site-nav {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .site-nav a {
+        font-size: 0.95rem;
+        white-space: nowrap; /* evita a capo sulle singole parole */
+    }
 }

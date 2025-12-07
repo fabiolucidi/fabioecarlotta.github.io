@@ -6,12 +6,19 @@
 
 
     <!-- Auto-rotating Gallery -->
-    <div class="story-gallery" style="position:relative;width:100%;height:300px;overflow:hidden;border-radius:12px;margin-bottom:1.5rem;">
-        <img src="/assets/img/flower.jpg" class="story-slide" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity 1s;" />
-        <img src="/assets/img/background.jpg" class="story-slide" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s;" />
-        <img src="/assets/img/qa.jpg" class="story-slide" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s;" />
-    </div>
+    <div class="story-gallery" role="region" aria-label="Galleria fotografica">
+        <figure class="story-slide" aria-hidden="false">
+            <img src="/assets/img/flower.jpg" alt="Decorazione floreale">
+        </figure>
 
+        <figure class="story-slide" aria-hidden="true">
+            <img src="/assets/img/background.jpg" alt="Panorama astratto">
+        </figure>
+
+        <figure class="story-slide" aria-hidden="true">
+            <img src="/assets/img/qa.jpg" alt="Dettaglio illustrativo">
+        </figure>
+    </div>
     <script>
         // Simple auto-rotation (no controls)
         document.addEventListener("DOMContentLoaded", () => {

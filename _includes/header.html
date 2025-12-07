@@ -1,4 +1,4 @@
-<header class="site-header">
+<header class="site-header wrapper">
 <div class="nav-wrapper" id="navbar">
   <div class="nav-container">
     <div class="brand">
@@ -7,7 +7,7 @@
   </div>
 
     <div class="nav-bar">
-        <nav class="site-nav">
+        <nav class="site-nav" aria-label="Navigazione principale">
             <a href="#">Home</a>
             <a href="#story">Story</a>
             <a href="#whwh">Where & When</a>
@@ -21,8 +21,12 @@
         <!-- Metti la tua illustrazione qui -->
         <img
                 src="{{ '/assets/img/flower.jpg' | relative_url }}"
-                alt="Flower illustration"
+                alt="Illustrazione floreale decorativa"
+                loading="lazy"
+                decoding="async"
+                role="presentation"
         />
+
     </div>
 
   <section id="home" class="hero">
@@ -40,3 +44,4 @@
 
   </section>
 </header>
+

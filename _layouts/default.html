@@ -5,6 +5,7 @@
     <title>{{ page.title | default: site.title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+
     <!-- Google Font Alice -->
     <link
       rel="preconnect"
@@ -30,7 +31,7 @@
 
   {% include header.html %}
 
-    <main>
+    <main role="main">
       {{ content }}
         {% include {{ page.lang }}/story.html %}
         {% include {{ page.lang }}/whwh.html %}
@@ -45,3 +46,5 @@
     {% include scripts.html %}
   </body>
 </html>
+
+
