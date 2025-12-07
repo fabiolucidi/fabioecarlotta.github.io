@@ -511,27 +511,81 @@ main {
     text-decoration: underline;
 }
 
-
-/* ================================
-   MOBILE NAV FIXES
-   ================================ */
-@media (max-width: 600px) {
+/* ============================================
+   MOBILE NAV — IMPACCHETTAMENTO ORDINATO
+   ============================================ */
+@media (max-width: 650px) {
 
     /* Logo più piccolo */
     .brand a {
-        font-size: 2.6rem;
+        font-size: 2.2rem;
     }
 
-    /* Nav più compatta */
+    /* Contenitore nav */
     .site-nav {
-        gap: 0.5rem;
+        display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        gap: 0.4rem 1rem; /* row-gap, column-gap */
+        max-width: 90%;
+        margin: 0 auto;
         text-align: center;
     }
 
+    /* Link */
     .site-nav a {
         font-size: 0.95rem;
-        white-space: nowrap; /* evita a capo sulle singole parole */
+        white-space: nowrap;
+        flex: 1 1 auto;
     }
+}
+
+/* ============================================
+   HERO — ottimizzazione mobile
+   ============================================ */
+@media (max-width: 600px) {
+
+    /* Spazio intorno al fiore */
+    .hero {
+        gap: 1.5rem;
+        padding: 2rem 0 2.5rem;
+    }
+
+    .hero-image img {
+        max-width: 65%; /* aumenta la presenza visiva */
+        margin: 0 auto 0.5rem;
+    }
+
+    /* Data più compatta, una riga sola */
+    .hero-date {
+        font-size: 1.3rem;
+        letter-spacing: 0.06em;
+        white-space: nowrap; /* impedisce l'andata a capo */
+    }
+
+    /* Nome coppia più armonico */
+    .hero h1 {
+        font-size: 2.2rem;
+        margin-top: 0.7rem;
+        margin-bottom: 0.7rem;
+    }
+
+    /* Sottotitoli location */
+    .hero-location {
+        font-size: 1.15rem;
+    }
+
+    .hero-location2 {
+        font-size: 1rem;
+        margin-bottom: 1.2rem;
+    }
+}
+
+/* reCAPTCHA v3 badge - versione discreta ed elegante */
+.grecaptcha-badge {
+    z-index: 9999 !important;
+    bottom: 8px !important;
+    right: 8px !important;
+    transform: scale(0.75); /* riduce la dimensione */
+    opacity: 0.55;         /* lo rende meno invadente (ma visibile) */
 }
