@@ -581,11 +581,105 @@ main {
     }
 }
 
-/* reCAPTCHA v3 badge - versione discreta ed elegante */
+
+/* reCAPTCHA v3 – Badge spostato sotto il footer */
 .grecaptcha-badge {
-    z-index: 9999 !important;
-    bottom: 8px !important;
-    right: 8px !important;
-    transform: scale(0.01); /* riduce la dimensione */
-    opacity: 0.95;         /* lo rende meno invadente (ma visibile) */
+    position: static !important; /* lo rimuove dalla posizione fissa predefinita */
+    margin-top: 2rem !important;
+    display: block !important;
+    text-align: center !important;
+}
+
+body > .grecaptcha-badge {
+    display: none !important; /* prevenzione se Google lo ricrea fuori posizione */
+}
+
+/* Wrapper per posizionare correttamente il badge */
+#recaptcha-footer-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+/* ============================================
+   MOBILE — Migliora larghezza testo sezioni
+   ============================================ */
+@media (max-width: 600px) {
+
+    .section p,
+    .section-std,
+    .default-text {
+        max-width: 92% !important;  /* più largo, ma con margine elegante */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Liste più leggibili */
+    .section ul,
+    .default-text ul {
+        max-width: 92% !important;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1.2rem; /* più spazio per i bullet */
+    }
+}
+
+/* ============================================
+   STORY — Doppia colonna (foto 3:4 intere)
+   ============================================ */
+
+#story .story-duo{
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+#story .story-col{
+    position: relative;
+    aspect-ratio: 3 / 4;            /* PERFETTO per 3024x4032 */
+    overflow: hidden;
+    border-radius: 18px;
+
+    background: #fff;            /* “carta” */
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    padding: 14px;                  /* passepartout */
+    display: grid;
+    place-items: center;
+}
+
+#story .story-col .story-slide{
+    position: absolute;
+    inset: 14px;
+    width: calc(100% - 28px);
+    height: calc(100% - 28px);
+    object-fit: contain;            /* FOTO INTERE */
+    display: block;
+
+    opacity: 0;
+    transition: opacity 1s ease;
+
+    background: #fff;               /* effetto stampa */
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+#story .story-col .story-slide.is-active{
+    opacity: 1;
+}
+
+/* Mobile: torna a colonna singola (molto più bello e grande) */
+@media (max-width: 700px){
+    #story .story-duo{
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    #story .story-col{
+        width: min(560px, 92vw);
+        margin: 0 auto;
+    }
 }
