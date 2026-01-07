@@ -1,34 +1,34 @@
 - name: B&B - All'Opera Prima
   img: /assets/img/operaprima.jpg
-  description: AbcAbcAbcAbcAbcAbc AbcAbcAbcAbcAbcAbc
+  description: Palazzo d'epoca in centro, vicino al nostro bar preferito.
   link: https://www.booking.com/hotel/it/b-b-all-opera-prima.it.html?label=b-b-all-opera-prima-Sj3YpVFg4bwEGlerVP45ZQS161700202312%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-47386351740%3Alp1008491%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YR10fBTovuitU5KVyXYg8iQ-Share-VJW4On%401767367979-Share-UxzvFq%401767368003-Share-JKgmv4t%401767368037-Share-4SAZF9v%401767368154-Share-CE09v4%401767368234&sid=e5e774664068c6970eab3527205c375a&aid=311091&ucfs=1&arphpl=1&checkin=2026-06-19&checkout=2026-06-21&dest_id=-132092&dest_type=city&group_adults=2&req_adults=2&no_rooms=1&group_children=0&req_children=0&hpos=1&hapos=1&sr_order=popularity&srpvid=b1cd757875019f2def7072573ef2d949&srepoch=1767368258&all_sr_blocks=46926001_91200321_2_0_0&highlighted_blocks=46926001_91200321_2_0_0&matching_block_id=46926001_91200321_2_0_0&sr_pri_blocks=46926001_91200321_2_0_0__33620&from=searchresults
   lat: 45.4402938
   lng: 10.9941761
 
 - name: B&B - Casanova
   img: /assets/img/casanova.jpg
-  description: AbcAbcAbcAbcAbcAbc AbcAbcAbcAbcAbcAbc
+  description: B&B comodo per chi viene in macchina a ridosso del centro.
   link: https://www.booking.com/hotel/it/b-amp-b-casanova.it.html?aid=311091&label=b-b-all-opera-prima-Sj3YpVFg4bwEGlerVP45ZQS161700202312%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-47386351740%3Alp1008491%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YR10fBTovuitU5KVyXYg8iQ-Share-VJW4On%401767367979-Share-UxzvFq%401767368003-Share-JKgmv4t%401767368037-Share-4SAZF9v%401767368154-Share-CE09v4%401767368234&sid=e5e774664068c6970eab3527205c375a&all_sr_blocks=43888110_362028867_2_1_0&checkin=2026-06-19&checkout=2026-06-21&dest_id=438881&dest_type=hotel&dist=0&group_adults=2&group_children=0&hapos=1&highlighted_blocks=43888110_362028867_2_1_0&hpos=1&matching_block_id=43888110_362028867_2_1_0&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=43888110_362028867_2_1_0__34550&srepoch=1767368660&srpvid=6af59cd82d4cbf1eb9039ea0fdcaead3&type=total&ucfs=1&
   lat: 45.4351879
   lng: 10.9966829
 
 - name: Truly Verona
   img: /assets/img/truly.jpg
-  description: ABC ABC ABC
+  description: Appartamenti e monolocali in centro a Verona.
   link: https://www.booking.com/hotel/it/truly-verona.it.html?aid=311091&label=b-b-all-opera-prima-62kWduwCmpk6qaAi7VYp4QS161700202312%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-51269550744%3Alp1008491%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YR10fBTovuitU5KVyXYg8iQ&sid=e5e774664068c6970eab3527205c375a&age=0&all_sr_blocks=54771125_88155282_2_0_0&checkin=2026-06-19&checkout=2026-06-21&dest_id=547711&dest_type=hotel&dist=0&group_adults=2&group_children=1&hapos=1&highlighted_blocks=54771125_88155282_2_0_0&hpos=1&matching_block_id=54771125_88155282_2_0_0&no_rooms=1&req_adults=2&req_age=0&req_children=1&room1=A%2CA%2C0&sb_price_type=total&sr_order=popularity&sr_pri_blocks=54771125_88155282_2_0_0__51200&srepoch=1767369729&srpvid=0060a92325a0393784cdcf4232473d26&type=total&ucfs=1&
   lat: 45.4430929
   lng: 10.9939351
 
 - name: Boutique Hotel Scalzi
   img: /assets/img/scalzi.jpg
-  description: ABC ABC ABC
+  description: L'Hotel consigliato per chi arriverà in treno.
   link: https://www.booking.com/hotel/it/scalzi.it.html?aid=311091&label=b-b-all-opera-prima-62kWduwCmpk6qaAi7VYp4QS161700202312%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-51269550744%3Alp1008491%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YR10fBTovuitU5KVyXYg8iQ&sid=e5e774664068c6970eab3527205c375a&age=0&checkin=2026-06-19&checkout=2026-06-21&dest_id=87709&dest_type=hotel&dist=0&group_adults=2&group_children=1&hapos=1&hpos=1&no_rooms=1&req_adults=2&req_age=0&req_children=1&room1=A%2CA%2C0&sb_price_type=total&soh=1&sr_order=popularity&srepoch=1767369869&srpvid=7104f0e7ac7115f3f4c016536e3bec6d&type=total&ucfs=1&#no_availability_msg
   lat: 45.4431
   lng: 10.9971
 
 - name: Mastino Rooms
   img: /assets/img/mastino.jpg
-  description: ...
+  description: Hotel a pochi passi dall'Arena e dal centro.
   link: https://www.booking.com/hotel/it/mastino-rooms.it.html?aid=311091&label=b-b-all-opera-prima-62kWduwCmpk6qaAi7VYp4QS161700202312%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-51269550744%3Alp1008491%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YR10fBTovuitU5KVyXYg8iQ&sid=e5e774664068c6970eab3527205c375a&age=0&all_sr_blocks=327797402_115194688_0_2_0_254466&checkin=2026-06-19&checkout=2026-06-21&dest_id=3277974&dest_type=hotel&dist=0&group_adults=2&group_children=1&hapos=1&highlighted_blocks=327797402_115194688_0_2_0_254466&hpos=1&matching_block_id=327797402_115194688_0_2_0_254466&no_rooms=1&req_adults=2&req_age=0&req_children=1&room1=A%2CA%2C0&sb_price_type=total&sr_order=popularity&sr_pri_blocks=327797402_115194688_0_2_0_254466_43246&srepoch=1767369269&srpvid=33c66defff0f833732a835fca551f4d1&type=total&ucfs=1&
   lat: 45.4373328
   lng: 10.9917415

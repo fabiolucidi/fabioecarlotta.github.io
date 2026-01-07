@@ -6,31 +6,53 @@
 
 
     <!-- Auto-rotating Gallery -->
-    <div class="story-gallery" role="region" aria-label="Galleria fotografica">
-        <figure class="story-slide" aria-hidden="false">
-            <img src="/assets/img/flower.jpg" alt="Decorazione floreale">
-        </figure>
+    <div class="story-duo" aria-label="Story gallery">
+        <div class="story-col" data-interval="4200">
+            <img src="/assets/img/01.jpg" class="story-slide is-active" alt="">
+            <img src="/assets/img/03.jpg" class="story-slide" alt="">
+            <img src="/assets/img/04.jpg" class="story-slide" alt="">
+            <img src="/assets/img/05.jpg" class="story-slide" alt="">
+            <img src="/assets/img/06.jpg" class="story-slide" alt="">
+            <img src="/assets/img/07.jpg" class="story-slide" alt="">
+            <img src="/assets/img/08.jpg" class="story-slide" alt="">
+            <img src="/assets/img/09.jpg" class="story-slide" alt="">
+        </div>
 
-        <figure class="story-slide" aria-hidden="true">
-            <img src="/assets/img/background.jpg" alt="Panorama astratto">
-        </figure>
-
-        <figure class="story-slide" aria-hidden="true">
-            <img src="/assets/img/qa.jpg" alt="Dettaglio illustrativo">
-        </figure>
+        <div class="story-col" data-interval="5600">
+            <img src="/assets/img/10.jpg" class="story-slide is-active" alt="">
+            <img src="/assets/img/11.jpg" class="story-slide" alt="">
+            <img src="/assets/img/12.jpg" class="story-slide" alt="">
+            <img src="/assets/img/13.jpg" class="story-slide" alt="">
+            <img src="/assets/img/14.jpg" class="story-slide" alt="">
+            <img src="/assets/img/15.jpg" class="story-slide" alt="">
+            <img src="/assets/img/16.jpg" class="story-slide" alt="">
+            <img src="/assets/img/17.jpg" class="story-slide" alt="">
+        </div>
     </div>
+
     <script>
-        // Simple auto-rotation (no controls)
         document.addEventListener("DOMContentLoaded", () => {
-            const slides = document.querySelectorAll('.story-slide');
-            let index = 0;
-            setInterval(() => {
-                slides[index].style.opacity = 0;
-                index = (index + 1) % slides.length;
-                slides[index].style.opacity = 1;
-            }, 4000);
+            const columns = document.querySelectorAll('#story .story-col');
+
+            columns.forEach((col, colIndex) => {
+                const slides = col.querySelectorAll('.story-slide');
+                let index = 0;
+
+                // sfalsamento iniziale: ogni colonna parte “in ritardo” rispetto all’altra
+                const interval = parseInt(col.dataset.interval || '4500', 10);
+                const initialDelay = 700 * colIndex;
+
+                setTimeout(() => {
+                    setInterval(() => {
+                        slides[index].classList.remove('is-active');
+                        index = (index + 1) % slides.length;
+                        slides[index].classList.add('is-active');
+                    }, interval);
+                }, initialDelay);
+            });
         });
     </script>
+
 
 
     <!-- Placeholder Text -->
