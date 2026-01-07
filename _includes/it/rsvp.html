@@ -15,16 +15,16 @@
 
         <!-- STEP 1 -->
         <div class="step active" id="step-1">
-            <h3 class="step-title">General Information</h3>
+            <h3 class="step-title">La tua presenza</h3>
 
             <div class="floating-label">
                 <input type="text" id="nome" name="nome" required placeholder=" " />
-                <label>Name*</label>
+                <label>Nome*</label>
             </div>
 
             <div class="floating-label">
                 <input type="text" id="cognome" name="cognome" required placeholder=" " />
-                <label>Surname*</label>
+                <label>Cognome*</label>
             </div>
 
             <div class="phone-row">
@@ -73,13 +73,13 @@
                         <option value="+56">🇨🇱 Chile (+56)</option>
                         <option value="+57">🇨🇴 Colombia (+57)</option>
                     </select>
-                    <label>Prefix*</label>
+                    <label>Prefisso*</label>
                 </div>
 
 
                 <div class="floating-label">
                     <input type="text" id="telefono" name="telefono" required placeholder=" " pattern="[0-9+() ]+" />
-                    <label>Phone number*</label>
+                    <label>Numero di telefono*</label>
                 </div>
             </div>
 
@@ -93,15 +93,15 @@
 
         <!-- NEW STEP 2 — WILL YOU JOIN US? -->
         <div class="step" id="step-2">
-            <h3 class="step-title">Wedding attendance</h3>
+            <h3 class="step-title">La tua presenza</h3>
 
             <div class="floating-label">
                 <select id="join" name="join" required>
                     <option value="" disabled selected hidden></option>
-                    <option value="Yes">Yes</option>
+                    <option value="Yes">Sì</option>
                     <option value="No">No</option>
                 </select>
-                <label>Will you join us for our wedding?</label>
+                <label>Sarai con noi il 20 giugno 2026?</label>
             </div>
 
             <button type="button" class="back-btn">Back</button>
@@ -111,25 +111,25 @@
 
         <!-- STEP 3 -->
         <div class="step" id="step-3">
-            <h3 class="step-title">Travel information</h3>
+            <h3 class="step-title">Il tuo arrivo e gli spostamenti</h3>
 
             <div class="floating-label">
                 <select id="arrivo" name="arrivo" required>
                     <option value="" disabled selected hidden></option>
                     <option value="19/06">19/06</option>
                     <option value="20/06">20/06</option>
-                    <option value="I live in Verona">I live in Verona</option>
+                    <option value="I live in Verona">Vivo a Verona</option>
                 </select>
-                <label>When will you arrive?</label>
+                <label>Quando arriverai a Verona?</label>
             </div>
 
             <div class="floating-label">
                 <select id="shuttle" name="shuttle" required>
                     <option value="" disabled selected hidden></option>
-                    <option value="Yes">Yes</option>
+                    <option value="Yes">Sì</option>
                     <option value="No">No</option>
                 </select>
-                <label>Will you use the shuttle?</label>
+                <label>Userai la navetta il giorno del matrimonio?</label>
             </div>
 
             <button type="button" class="back-btn">Back</button>
@@ -138,20 +138,20 @@
 
         <!-- STEP 4 -->
         <div class="step" id="step-4">
-            <h3 class="step-title">Food information</h3>
+            <h3 class="step-title">A Tavola</h3>
 
             <div class="floating-label">
                 <select id="allergie" name="allergie" required>
                     <option value="" disabled selected hidden></option>
                     <option value="No">No</option>
-                    <option value="Yes">Yes</option>
+                    <option value="Yes">Sì</option>
                 </select>
-                <label>Do you have any allergies?</label>
+                <label>Hai allergie alimentari?</label>
             </div>
 
             <div class="floating-label" id="allergieField" style="display:none;">
                 <textarea id="listaAllergie" name="listaAllergie" placeholder=" "></textarea>
-                <label>If yes, specify</label>
+                <label>Quali?</label>
             </div>
 
             <div class="floating-label">
@@ -160,16 +160,16 @@
                     <option value="No">No</option>
                     <option value="Yes">Yes</option>
                 </select>
-                <label>Diet restrictions?</label>
+                <label>Hai esigenze o preferenze alimentari?</label>
             </div>
 
             <div class="floating-label" id="dietaField" style="display:none;">
                 <select id="tipoDieta" name="tipoDieta">
                     <option value="" disabled selected hidden></option>
-                    <option value="Vegetarian">Vegetarian</option>
-                    <option value="Vegan">Vegan</option>
+                    <option value="Vegetarian">Vegetariano</option>
+                    <option value="Vegan">Vegano</option>
                 </select>
-                <label>If yes, choose</label>
+                <label>Se sì, quali?</label>
             </div>
 
             <button type="button" class="back-btn">Back</button>
@@ -178,17 +178,17 @@
 
         <!-- STEP 5 -->
         <div class="step" id="step-5">
-            <h3 class="step-title">Others</h3>
+            <h3 class="step-title">Un'ultima nota...</h3>
 
             <div class="floating-label">
                 <textarea id="messaggio" name="messaggio" maxlength="500" placeholder=" "></textarea>
-                <label>Anything else? 😊</label>
+                <label>Vuoi dirci altro? 😊</label>
             </div>
 
             <p id="char-count">0/500</p>
 
-            <button type="button" class="back-btn">Back</button>
-            <button type="submit" class="submit-btn">Send RSVP</button>
+            <button type="button" class="back-btn">Indietro</button>
+            <button type="submit" class="submit-btn">Invia RSVP</button>
         </div>
 
     </form>
