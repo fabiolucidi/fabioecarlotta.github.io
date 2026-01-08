@@ -88,7 +88,7 @@
                 <label>Email</label>
             </div>
 
-            <button type="button" class="next-btn">Next</button>
+            <button type="button" class="next-btn">Avanti</button>
         </div>
 
         <!-- NEW STEP 2 — WILL YOU JOIN US? -->
@@ -104,8 +104,8 @@
                 <label>Sarai con noi il 20 giugno 2026?</label>
             </div>
 
-            <button type="button" class="back-btn">Back</button>
-            <button type="button" class="next-btn">Next</button>
+            <button type="button" class="back-btn">Indietro</button>
+            <button type="button" class="next-btn">Avanti</button>
         </div>
 
 
@@ -132,8 +132,8 @@
                 <label>Userai la navetta il giorno del matrimonio?</label>
             </div>
 
-            <button type="button" class="back-btn">Back</button>
-            <button type="button" class="next-btn">Next</button>
+            <button type="button" class="back-btn">Indietro</button>
+            <button type="button" class="next-btn">Avanti</button>
         </div>
 
         <!-- STEP 4 -->
@@ -172,8 +172,8 @@
                 <label>Se sì, quali?</label>
             </div>
 
-            <button type="button" class="back-btn">Back</button>
-            <button type="button" class="next-btn">Next</button>
+            <button type="button" class="back-btn">Indietro</button>
+            <button type="button" class="next-btn">Avanti</button>
         </div>
 
         <!-- STEP 5 -->
@@ -206,7 +206,7 @@
     /* ======================
        CONFIG
     ====================== */
-    const ENDPOINT = "https://script.google.com/macros/s/AKfycbw9rTu1poEXSBb_q1OTctQ5K4YTrWmsDW4md4xYdJI2mYXEyVxcU2Mk-feFtztP2fln/exec";
+    const ENDPOINT = "https://script.google.com/macros/s/AKfycbye6o8K4LWN1wexdXRTVE6nPpagQMoU_Fopsuz0mRgDB-RjY52Ckw4XWxrVnq9GbcA0/exec";
     const SITE_KEY = "6LfSNhosAAAAAAGFpMX5do3nDtl8ImAYIgpHLV8k";
 
     /* ======================
@@ -336,7 +336,7 @@
         var end = Date.now() + duration;
 
         (function frame() {
-            confetti({ particleCount: 6, spread: 70 });
+            confetti({ particleCount: 24, spread: 210 });
             if (Date.now() < end) requestAnimationFrame(frame);
         })();
     }
