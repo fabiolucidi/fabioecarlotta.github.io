@@ -671,7 +671,7 @@ body > .grecaptcha-badge {
     opacity: 1;
 }
 
-/* Mobile: torna a colonna singola (molto più bello e grande) */
+/* Mobile — colonna singola, sempre dentro la colonna */
 @media (max-width: 700px){
     #story .story-duo{
         grid-template-columns: 1fr;
@@ -679,7 +679,8 @@ body > .grecaptcha-badge {
     }
 
     #story .story-col{
-        width: min(560px, 92vw);
+        width: 100%;        /* NON vw */
+        max-width: 100%;   /* NON min() */
         margin: 0 auto;
     }
 }
