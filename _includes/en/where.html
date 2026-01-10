@@ -1,18 +1,20 @@
-{% comment %}
-Sezione "Where To Stay"
-Carosello Swiper.js a 3 card (scorrimento classico)
-{% endcomment %}
-
 <section id="where-to-stay" class="section-std">
 
     <!-- Intro -->
     <div class="default-title">
         <h2>Where to Stay</h2>
         <p class="default-text">
-            Life has brought incredible people into our path — some from nearby, others from all around the world.
-            For those who may not be familiar with the city of Verona, we’ve put together a few suggestions on where to stay and what to explore during your time here.
+            Some of you are coming from nearby, others from a little farther away — to make your stay easier, you’ll find here a selection of recommended hotels and B&Bs.
         </p>
-
+        <p class="default-text">
+            We recommend staying in the historic city center, a convenient and lively area, well connected and perfect for enjoying the city and reaching Villa Pellegrini.
+        </p>
+        <p class="default-text">
+            Verona offers a wide range of accommodation options — please consider these as indications of the area rather than binding recommendations.
+        </p>
+        <p class="default-text">
+            If you’ve found something else or need a suggestion, we’re here for you.
+        </p>
     </div>
 
 
@@ -44,7 +46,7 @@ Carosello Swiper.js a 3 card (scorrimento classico)
 
                         <a href="{{ stay.link }}" target="_blank"
                            style="color:#0066cc;font-weight:bold;text-decoration:none;">
-                            Visita →
+                            Visit →
                         </a>
                     </div>
                 </div>
@@ -132,7 +134,7 @@ Carosello Swiper.js a 3 card (scorrimento classico)
                         <img src="${s.img}" style="width:100%; border-radius:8px; margin-bottom:6px;">
                         <h4>${s.name}</h4>
                         <p style="font-size:0.85rem;">${s.description}</p>
-                        <a href="${s.link}" target="_blank" style="font-weight:bold; color:#0077cc;">Visita →</a>
+                        <a href="${s.link}" target="_blank" style="font-weight:bold; color:#0077cc;">Visit →</a>
                     </div>
                 `);
             });

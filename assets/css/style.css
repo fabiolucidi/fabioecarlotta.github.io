@@ -269,7 +269,7 @@ main {
     background: #fff;                 /* colore di sfondo quando è sticky */
     padding: 0.6rem 1.5rem;           /* riduci l’altezza se vuoi */
     box-shadow: 0 2px 8px rgba(0,0,0,.12);
-    z-index: 1000;
+    z-index: 9999;
 }
 
 .step {
@@ -458,8 +458,14 @@ main {
 }
 
 .list {
-    padding-left: 2.5rem;  /* aumenta/ diminuisci il valore a piacere */
+    padding-left: 0rem;  /* aumenta/ diminuisci il valore a piacere */
     margin-left: 0.5rem;   /* opzionale */
+    list-style: none;
+}
+
+.list li {
+    margin-bottom: 1.2rem; /* spazio tra le domande */
+    margin-top: 1.2rem;
 }
 
 .stay-card:hover img {
@@ -683,4 +689,50 @@ body > .grecaptcha-badge {
         max-width: 100%;   /* NON min() */
         margin: 0 auto;
     }
+}
+
+/* Language switcher — EN | IT */
+.language-switcher {
+    position: fixed;
+    top: 18px;
+    right: 20px;
+    z-index: 10000; /* sopra header e Leaflet */
+    font-family: "Raleway", system-ui, sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 6px 10px;
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+    opacity: 0.85;
+}
+
+.language-switcher a {
+    text-decoration: none;
+    color: #777;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.language-switcher a:hover {
+    color: #000;
+    opacity: 1;
+}
+
+.language-switcher .current {
+    color: #000;
+    font-weight: 700;
+}
+
+.language-switcher span {
+    margin: 0 6px;
+    color: #aaa;
+}
+
+#story.section-std {
+    padding-top: 0.75rem; /* prova 0.5rem se la vuoi ancora più vicina */
+}
+
+#story {
+    margin-top: -1.5rem;
 }

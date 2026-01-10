@@ -13,7 +13,7 @@
             <a href="#where-and-when">Where & When</a>
             <a href="#rsvp">RSVP</a>
             <a href="#where-to-stay">Where to Stay</a>
-            <a href="#gifts">Gifts</a>
+        <!--    <a href="#gifts">Gifts</a> -->
             <a href="#qa">Q &amp; A</a>
         </nav>
     </div>
@@ -29,6 +29,12 @@
         />
 
     </div>
+    <div class="language-switcher">
+        <a href="/" class="{% if page.lang != 'en' %}current{% endif %}">IT</a>
+        <span>|</span>
+        <a href="/en/" class="{% if page.lang == 'en' %}current{% endif %}">EN</a>
+    </div>
+
 
   <section id="home" class="hero">
     <div class="hero-text">
@@ -42,7 +48,6 @@
       </p>
      <!-- <a href="{{ site.wedding.rsvp_link }}" class="btn-primary">RSVP</a> -->
     </div>
-
   </section>
 </header>
 
