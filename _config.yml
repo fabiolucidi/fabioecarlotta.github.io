@@ -6,7 +6,8 @@ theme: null
 
 wedding:
   couple_names: "Fabio & Carlotta"
-  date: "20th of June 2026"
+  date_en: "20th of June 2026"
+  date_it: "20 giugno 2026"
   location_line1: "Villa Pellegrini"
   location_line2: "Romagnano di Valpantena, Verona"
   rsvp_link: ""

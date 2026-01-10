@@ -38,7 +38,13 @@
 
   <section id="home" class="hero">
     <div class="hero-text">
-      <p class="hero-date">{{ site.wedding.date }}</p>
+        <p class="hero-date">
+            {% if page.lang == "en" %}
+            {{ site.wedding.date_en }}
+            {% else %}
+            {{ site.wedding.date_it }}
+            {% endif %}
+        </p>
         <h1>{{ site.wedding.couple_names }}</h1>
       <p class="hero-location">
         {{ site.wedding.location_line1 }}
@@ -46,7 +52,6 @@
       <p class="hero-location2">
         {{ site.wedding.location_line2 }}
       </p>
-     <!-- <a href="{{ site.wedding.rsvp_link }}" class="btn-primary">RSVP</a> -->
     </div>
   </section>
 </header>
