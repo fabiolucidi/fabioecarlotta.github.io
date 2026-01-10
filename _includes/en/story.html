@@ -1,7 +1,7 @@
 <section id="story" class="section-std">
 
     <div class="default-title">
-        <h2>Story</h2>
+        <h2>{{ t.sections.story }}</h2>
     </div>
 
     <!-- Auto-rotating Gallery -->
@@ -28,6 +28,75 @@
             <img src="/assets/img/17.jpg" class="story-slide" alt="">
         </div>
     </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const mobileMQ = window.matchMedia("(max-width: 700px)");
+
+            function mergeColumnsForMobile() {
+                const duo = document.querySelector("#story .story-duo");
+                const cols = duo ? duo.querySelectorAll(".story-col") : null;
+                if (!duo || !cols || cols.length < 2) return;
+
+                // Evita di farlo due volte
+                if (duo.dataset.merged === "1") return;
+
+                const colA = cols[0];
+                const colB = cols[1];
+
+                // Sposta tutte le slide dalla colonna B alla A
+                colB.querySelectorAll(".story-slide").forEach(img => {
+                    img.classList.remove("is-active");   // reset stato
+                    colA.appendChild(img);
+                });
+
+                // Rimuovi la colonna B
+                colB.remove();
+
+                // Assicurati che la prima immagine sia visibile
+                const allSlides = colA.querySelectorAll(".story-slide");
+                if (allSlides.length) allSlides[0].classList.add("is-active");
+
+                // Imposta un interval unico per mobile
+                colA.dataset.interval = "2100";
+
+                duo.dataset.merged = "1";
+            }
+
+            // Inizializza rotazione su tutte le colonne presenti (1 su mobile, 2 su desktop)
+            function initRotation() {
+                const columns = document.querySelectorAll("#story .story-col");
+
+                columns.forEach((col, colIndex) => {
+                    const slides = col.querySelectorAll(".story-slide");
+                    if (!slides.length) return;
+
+                    let index = 0;
+                    const interval = parseInt(col.dataset.interval || "4500", 10);
+                    const initialDelay = 700 * colIndex;
+
+                    setTimeout(() => {
+                        setInterval(() => {
+                            slides[index].classList.remove("is-active");
+                            index = (index + 1) % slides.length;
+                            slides[index].classList.add("is-active");
+                        }, interval);
+                    }, initialDelay);
+                });
+            }
+
+            // Se siamo su mobile, prima unisci, poi avvia
+            if (mobileMQ.matches) {
+                mergeColumnsForMobile();
+            }
+            initRotation();
+
+            // (Opzionale) Se ridimensioni la finestra dopo il load:
+            // non “sdoppiamo” di nuovo (evitiamo complicazioni).
+            // Se ti serve davvero anche su resize, la via più pulita è ricaricare la pagina.
+        });
+    </script>
 
     <!-- Story text -->
     <div class="default-text">

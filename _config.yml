@@ -16,3 +16,34 @@ github_username: fabiolucidi
 repository: fabiolucidi/fabioecarlotta.github.io
 repo_url: https://github.com/fabiolucidi/fabioecarlotta.github.io
 
+
+i18n:
+  it:
+    nav:
+      home: "Home"
+      story: "Storia"
+      where_when: "Cerimonia e Party"
+      rsvp: "RSVP"
+      where_stay: "Dove dormire"
+      qa: "Q&A"
+    sections:
+      story: "Storia"
+      where_when: "Cerimonia e Party"
+      rsvp: "RSVP"
+      where_stay: "Dove dormire"
+      qa: "Q&A"
+
+  en:
+    nav:
+      home: "Home"
+      story: "Story"
+      where_when: "Where & When"
+      rsvp: "RSVP"
+      where_stay: "Where to Stay"
+      qa: "Q&A"
+    sections:
+      story: "Story"
+      where_when: "Where & When"
+      rsvp: "RSVP"
+      where_stay: "Where to Stay"
+      qa: "Q&A"

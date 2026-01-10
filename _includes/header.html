@@ -4,18 +4,20 @@
     <div class="brand">
       <a href="{{ '/' | relative_url }}">F&C</a>
     </div>
+      {% assign lang = page.lang | default: "it" %}
+      {% assign t = site.i18n[lang] | default: site.i18n.it %}
   </div>
 
     <div class="nav-bar">
         <nav class="site-nav" aria-label="Navigazione principale">
-            <a href="#">Home</a>
-            <a href="#story">Story</a>
-            <a href="#where-and-when">Where & When</a>
-            <a href="#where-to-stay">Where to Stay</a>
-            <a href="#rsvp">RSVP</a>
-        <!--    <a href="#gifts">Gifts</a> -->
-            <a href="#qa">Q &amp; A</a>
+            <a href="#">{{ t.nav.home }}</a>
+            <a href="#story">{{ t.nav.story }}</a>
+            <a href="#where-and-when">{{ t.nav.where_when }}</a>
+            <a href="#rsvp">{{ t.nav.rsvp }}</a>
+            <a href="#where-to-stay">{{ t.nav.where_stay }}</a>
+            <a href="#qa">{{ t.nav.qa }}</a>
         </nav>
+
     </div>
 </div>
     <div class="hero-image">
