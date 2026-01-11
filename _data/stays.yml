@@ -1,3 +1,10 @@
+- name: Palazzo Fracastoro
+  img: /assets/img/palazzofc.jpg
+  description: A pochi passi dall'Arena, contattate Olimpia che vi farà sentire subito a casa.
+  link: https://www.palazzofracastoro.it
+  lat: 45.4361442
+  lng: 10.9968851
+
 - name: B&B - All'Opera Prima
   img: /assets/img/operaprima.jpg
   description: Palazzo d'epoca in centro, vicino al nostro bar preferito.

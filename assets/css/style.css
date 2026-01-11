@@ -736,3 +736,11 @@ body > .grecaptcha-badge {
 #story {
     margin-top: -1.5rem;
 }
+
+.stay-card-content {
+    font-family: "Raleway", system-ui, sans-serif;
+}
+
+.stay-card-content h3 {
+    font-family: "Alice", serif;
+}
