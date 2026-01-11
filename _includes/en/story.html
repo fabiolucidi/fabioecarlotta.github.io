@@ -1,34 +1,39 @@
 <section id="story" class="section-std">
-
     <div class="default-title">
         <h2>{{ t.sections.story }}</h2>
     </div>
 
     <!-- Auto-rotating Gallery -->
     <div class="story-duo" aria-label="Story gallery">
-        <div class="story-col" data-interval="2100">
-            <img src="/assets/img/01.jpg" class="story-slide is-active" alt="">
-            <img src="/assets/img/03.jpg" class="story-slide" alt="">
-            <img src="/assets/img/04.jpg" class="story-slide" alt="">
-            <img src="/assets/img/05.jpg" class="story-slide" alt="">
-            <img src="/assets/img/06.jpg" class="story-slide" alt="">
-            <img src="/assets/img/07.jpg" class="story-slide" alt="">
-            <img src="/assets/img/08.jpg" class="story-slide" alt="">
-            <img src="/assets/img/09.jpg" class="story-slide" alt="">
+        <div class="story-col" data-interval="1500">
+            <img src="{{ '/assets/img/01.jpg' | relative_url }}" class="story-slide is-active" loading="eager" alt="">
+            <img src="{{ '/assets/img/03.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/04.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/05.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/06.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/07.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/08.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/09.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/18.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/19.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/20.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/24.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
         </div>
 
-        <div class="story-col" data-interval="2800">
-            <img src="/assets/img/10.jpg" class="story-slide is-active" alt="">
-            <img src="/assets/img/11.jpg" class="story-slide" alt="">
-            <img src="/assets/img/12.jpg" class="story-slide" alt="">
-            <img src="/assets/img/13.jpg" class="story-slide" alt="">
-            <img src="/assets/img/14.jpg" class="story-slide" alt="">
-            <img src="/assets/img/15.jpg" class="story-slide" alt="">
-            <img src="/assets/img/16.jpg" class="story-slide" alt="">
-            <img src="/assets/img/17.jpg" class="story-slide" alt="">
+        <div class="story-col" data-interval="1800">
+            <img src="{{ '/assets/img/10.jpg' | relative_url }}" class="story-slide is-active" loading="eager" alt="">
+            <img src="{{ '/assets/img/11.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/12.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/13.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/14.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/15.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/16.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/17.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/21.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/22.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/23.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
         </div>
     </div>
-
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -86,34 +91,48 @@
                 });
             }
 
-            // Se siamo su mobile, prima unisci, poi avvia
+            // Se siamo su mobile, prima unisci
             if (mobileMQ.matches) {
                 mergeColumnsForMobile();
             }
-            initRotation();
 
-            // (Opzionale) Se ridimensioni la finestra dopo il load:
-            // non “sdoppiamo” di nuovo (evitiamo complicazioni).
-            // Se ti serve davvero anche su resize, la via più pulita è ricaricare la pagina.
+            /* ======================
+               IMAGE ERROR RETRY (1x)
+               ====================== */
+            document.querySelectorAll("#story img.story-slide").forEach(img => {
+                img.addEventListener("error", () => {
+                    // ritenta 1 volta dopo 300ms (cache-busting)
+                    setTimeout(() => {
+                        const src = img.getAttribute("src");
+                        img.setAttribute(
+                            "src",
+                            src + (src.includes("?") ? "&" : "?") + "r=" + Date.now()
+                        );
+                    }, 300);
+                }, { once: true });
+            });
+
+            // Poi avvia la rotazione
+            initRotation();
         });
     </script>
 
     <!-- Story text -->
     <div class="default-text">
         <p>
-            They say we first met in the year 2000. Or maybe it was 2001… or 2002!
+            They say we first met in the year 2000. Or maybe it was 2001 or 2002?
         </p>
         <p>
-            It doesn’t really matter — neither of us truly remembers. What matters is that twenty years later, in Milan, everything changed.
+            It doesn’t really matter, neither of us truly remembers. What matters is that twenty years later, in Milan, everything changed.
         </p><br>
         <p>
-            From that moment on, things slowly began to take shape: concerts that turned into habits, spontaneous trips and carefully planned ones, departures, returns, new departures — and that growing feeling of being in the right place, together.
+            From that moment on, things slowly began to take shape: concerts that turned into habits, spontaneous trips and carefully planned ones, departures, returns, new departures and that growing feeling of being in the right place, together.
         </p>
         <p>
-            And like all stories that truly matter, ours also had a place of the heart — a place where, more or less knowingly, we kept meeting for years, through dinners, summer holidays, aperitifs, graduation parties, and birthdays.
+            And like all stories that truly matter, ours also had a place of the heart a place where, more or less knowingly, we kept meeting for years, through dinners, summer holidays, aperitifs, graduation parties, and birthdays.
         </p><br>
         <p>
-            That’s why, on <i>June 20th, 2026</i>, we’ll return to Villa Pellegrini — this time to celebrate our wedding and to write the rest of our story together with all of you.
+            That’s why, on <i>June 20th, 2026</i>, we’ll return to Villa Pellegrini...this time to celebrate our wedding and to write the rest of our story together with all of you.
         </p>
     </div>
 

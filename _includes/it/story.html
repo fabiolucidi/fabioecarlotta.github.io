@@ -2,35 +2,36 @@
     <div class="default-title">
         <h2>{{ t.sections.story }}</h2>
     </div>
+
     <!-- Auto-rotating Gallery -->
     <div class="story-duo" aria-label="Story gallery">
         <div class="story-col" data-interval="1500">
-            <img src="/assets/img/01.jpg" class="story-slide is-active" alt="">
-            <img src="/assets/img/03.jpg" class="story-slide" alt="">
-            <img src="/assets/img/04.jpg" class="story-slide" alt="">
-            <img src="/assets/img/05.jpg" class="story-slide" alt="">
-            <img src="/assets/img/06.jpg" class="story-slide" alt="">
-            <img src="/assets/img/07.jpg" class="story-slide" alt="">
-            <img src="/assets/img/08.jpg" class="story-slide" alt="">
-            <img src="/assets/img/09.jpg" class="story-slide" alt="">
-            <img src="/assets/img/18.jpg" class="story-slide" alt="">
-            <img src="/assets/img/19.jpg" class="story-slide" alt="">
-            <img src="/assets/img/20.jpg" class="story-slide" alt="">
-            <img src="/assets/img/24.jpg" class="story-slide" alt="">
+            <img src="{{ '/assets/img/01.jpg' | relative_url }}" class="story-slide is-active" loading="eager" alt="">
+            <img src="{{ '/assets/img/03.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/04.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/05.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/06.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/07.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/08.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/09.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/18.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/19.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/20.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/24.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
         </div>
 
         <div class="story-col" data-interval="1800">
-            <img src="/assets/img/10.jpg" class="story-slide is-active" alt="">
-            <img src="/assets/img/11.jpg" class="story-slide" alt="">
-            <img src="/assets/img/12.jpg" class="story-slide" alt="">
-            <img src="/assets/img/13.jpg" class="story-slide" alt="">
-            <img src="/assets/img/14.jpg" class="story-slide" alt="">
-            <img src="/assets/img/15.jpg" class="story-slide" alt="">
-            <img src="/assets/img/16.jpg" class="story-slide" alt="">
-            <img src="/assets/img/17.jpg" class="story-slide" alt="">
-            <img src="/assets/img/21.jpg" class="story-slide" alt="">
-            <img src="/assets/img/22.jpg" class="story-slide" alt="">
-            <img src="/assets/img/23.jpg" class="story-slide" alt="">
+            <img src="{{ '/assets/img/10.jpg' | relative_url }}" class="story-slide is-active" loading="eager" alt="">
+            <img src="{{ '/assets/img/11.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/12.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/13.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/14.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/15.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/16.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/17.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/21.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/22.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
+            <img src="{{ '/assets/img/23.jpg' | relative_url }}" class="story-slide" loading="lazy" alt="">
         </div>
     </div>
 
@@ -90,24 +91,35 @@
                 });
             }
 
-            // Se siamo su mobile, prima unisci, poi avvia
+            // Se siamo su mobile, prima unisci
             if (mobileMQ.matches) {
                 mergeColumnsForMobile();
             }
-            initRotation();
 
-            // (Opzionale) Se ridimensioni la finestra dopo il load:
-            // non “sdoppiamo” di nuovo (evitiamo complicazioni).
-            // Se ti serve davvero anche su resize, la via più pulita è ricaricare la pagina.
+            /* ======================
+               IMAGE ERROR RETRY (1x)
+               ====================== */
+            document.querySelectorAll("#story img.story-slide").forEach(img => {
+                img.addEventListener("error", () => {
+                    // ritenta 1 volta dopo 300ms (cache-busting)
+                    setTimeout(() => {
+                        const src = img.getAttribute("src");
+                        img.setAttribute(
+                            "src",
+                            src + (src.includes("?") ? "&" : "?") + "r=" + Date.now()
+                        );
+                    }, 300);
+                }, { once: true });
+            });
+
+            // Poi avvia la rotazione
+            initRotation();
         });
     </script>
 
-
-
-
     <!-- Placeholder Text -->
     <div class="default-text">
-        <p>Dicono che ci siamo incontrati la prima volta nel 2000. O forse era 2001 o il 2002!</p>
+        <p>Dicono che ci siamo incontrati la prima volta nel 2000. O forse era il 2001 o il 2002?</p>
         <p>Non importa, nessuno dei due se lo ricorda davvero: quel che conta è che vent’anni dopo, a Milano è cambiato tutto.</p><br>
         <p>Da lì in poi le cose hanno iniziato a prendere forma: concerti che diventavano abitudini, viaggi improvvisati, viaggi pianificati, partenze, ritorni, ripartenze e quel sentirsi sempre più spesso nel posto giusto, insieme.</p>
         <p>E come tutte le storie che contano, anche la nostra ha avuto un luogo del cuore, dove più o meno consapevolmente ci siamo incontrati per anni, tra cene, ferragosti, aperitivi, feste di laurea e compleanni.</p><br>
