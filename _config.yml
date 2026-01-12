@@ -32,6 +32,13 @@ i18n:
       rsvp: "RSVP"
       where_stay: "Dove dormire"
       qa: "Q&A"
+    loading_title: "Invio in corso…"
+    loading_sub: "Attendi un secondo 💛"
+    thanks_yes_title: "RSVP ricevuto ✨"
+    thanks_yes_body: "Non vediamo l’ora di festeggiare insieme 🥂"
+    thanks_no_title: "Grazie per averci avvisato 💛"
+    thanks_no_body: "Ci dispiace non averti con noi, ma grazie di cuore per la risposta."
+    submit_sending: "Invio..."
 
   en:
     nav:
@@ -47,3 +54,10 @@ i18n:
       rsvp: "RSVP"
       where_stay: "Where to Stay"
       qa: "Q&A"
+    loading_title: "Sending…"
+    loading_sub: "Just a second 💛"
+    thanks_yes_title: "RSVP received ✨"
+    thanks_yes_body: "Can’t wait to celebrate together 🥂"
+    thanks_no_title: "Thanks for letting us know 💛"
+    thanks_no_body: "We’ll miss you, but thank you so much for your reply."
+    submit_sending: "Sending..."

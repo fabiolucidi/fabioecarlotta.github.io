@@ -744,3 +744,72 @@ body > .grecaptcha-badge {
 .stay-card-content h3 {
     font-family: "Alice", serif;
 }
+
+/* Loading overlay RSVP */
+.rsvp-loading{
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,.35);
+    backdrop-filter: blur(2px);
+    z-index: 9999;
+}
+
+.rsvp-loading.is-active{ display: flex; }
+
+.rsvp-loading__box{
+    background: #fff;
+    border-radius: 18px;
+    padding: 18px 20px;
+    width: min(92vw, 360px);
+    box-shadow: 0 16px 40px rgba(0,0,0,.18);
+    text-align: center;
+}
+
+.rsvp-spinner{
+    width: 28px;
+    height: 28px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    border: 3px solid rgba(0,0,0,.15);
+    border-top-color: rgba(0,0,0,.6);
+    animation: rsvpSpin .8s linear infinite;
+}
+
+@keyframes rsvpSpin { to { transform: rotate(360deg); } }
+
+.rsvp-loading__text{ margin: 0; font-weight: 600; }
+.rsvp-loading__sub{ margin: 6px 0 0; opacity: .75; font-size: .95rem; }
+
+/* Thank you message */
+#thankyou-animation{
+    display: none;
+    margin-top: 24px;
+    padding: 22px 20px;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 16px 40px rgba(0,0,0,.12);
+    text-align: center;
+    animation: fadeUp .5s ease forwards;
+}
+
+#thankyou-animation.is-visible{
+    display: block;
+}
+
+#thankyou-animation h3{
+    margin: 0 0 8px;
+    font-size: 1.4rem;
+}
+
+#thankyou-animation p{
+    margin: 0;
+    opacity: .85;
+}
+
+@keyframes fadeUp{
+    from{ opacity:0; transform: translateY(12px); }
+    to{ opacity:1; transform: translateY(0); }
+}

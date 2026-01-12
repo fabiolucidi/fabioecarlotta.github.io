@@ -187,15 +187,95 @@
 
         </form>
 
-        <div id="thankyou-animation"></div>
-    </div>
+        <!-- Loading overlay (localized via JS I18N) -->
+        <div id="rsvp-loading" class="rsvp-loading" aria-hidden="true">
+            <div class="rsvp-loading__box" role="status" aria-live="polite">
+                <div class="rsvp-spinner" aria-hidden="true"></div>
+                <p class="rsvp-loading__text" id="loading-title"></p>
+                <p class="rsvp-loading__sub" id="loading-sub"></p>
+            </div>
+        </div>
 
+        <!-- Thank you message (localized via JS I18N) -->
+        <div id="thankyou-animation"></div>
+
+    </div>
 
     <!-- reCAPTCHA -->
     <script src="https://www.google.com/recaptcha/api.js?render=6LfSNhosAAAAAAGFpMX5do3nDtl8ImAYIgpHLV8k"></script>
 
     <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- (Facoltativo) CSS inline se vuoi tenerlo in pagina: altrimenti spostalo nel tuo CSS globale -->
+    <style>
+        /* Loading overlay RSVP */
+        .rsvp-loading{
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,.35);
+            backdrop-filter: blur(2px);
+            z-index: 9999;
+        }
+        .rsvp-loading.is-active{ display:flex; }
+        .rsvp-loading__box{
+            background:#fff;
+            border-radius:18px;
+            padding:18px 20px;
+            width:min(92vw, 360px);
+            box-shadow:0 16px 40px rgba(0,0,0,.18);
+            text-align:center;
+        }
+        .rsvp-spinner{
+            width:28px; height:28px;
+            margin:0 auto 10px;
+            border-radius:50%;
+            border:3px solid rgba(0,0,0,.15);
+            border-top-color: rgba(0,0,0,.6);
+            animation:rsvpSpin .8s linear infinite;
+        }
+        @keyframes rsvpSpin{ to{ transform: rotate(360deg);} }
+
+        .rsvp-loading__text{ margin:0; font-weight:600; }
+        .rsvp-loading__sub{ margin:6px 0 0; opacity:.75; font-size:.95rem; }
+
+        /* Thank you message */
+        #thankyou-animation{
+            display:none;
+            margin-top:24px;
+            padding:22px 20px;
+            border-radius:18px;
+            background:#fff;
+            box-shadow:0 16px 40px rgba(0,0,0,.12);
+            text-align:center;
+            animation:fadeUp .5s ease forwards;
+        }
+        #thankyou-animation.is-visible{ display:block; }
+        #thankyou-animation h3{ margin:0 0 8px; font-size:1.4rem; }
+        #thankyou-animation p{ margin:0; opacity:.85; }
+
+        @keyframes fadeUp{
+            from{ opacity:0; transform: translateY(12px); }
+            to{ opacity:1; transform: translateY(0); }
+        }
+    </style>
+
+    <!-- I18N bridge from _config.yml -->
+    <script>
+        const LANG = "{{ lang }}";
+        const I18N = {
+            loading_title: "{{ t.loading_title | escape }}",
+            loading_sub: "{{ t.loading_sub | escape }}",
+            thanks_yes_title: "{{ t.thanks_yes_title | escape }}",
+            thanks_yes_body: "{{ t.thanks_yes_body | escape }}",
+            thanks_no_title: "{{ t.thanks_no_title | escape }}",
+            thanks_no_body: "{{ t.thanks_no_body | escape }}",
+            submit_sending: "{{ t.submit_sending | default: 'Invio…' | escape }}"
+        };
+    </script>
 
     <script>
         /* ======================
@@ -219,7 +299,13 @@
             }
         }
 
-        document.addEventListener("DOMContentLoaded", () => showStep(1));
+        document.addEventListener("DOMContentLoaded", () => {
+            showStep(1);
+
+            document.getElementById("loading-title").textContent = I18N.loading_title;
+            document.getElementById("loading-sub").textContent = I18N.loading_sub;
+        });
+
 
         /* BOTTONI "NEXT" */
         document.querySelectorAll(".next-btn").forEach(btn =>
@@ -261,7 +347,6 @@
             document.getElementById("char-count").textContent = this.value.length + "/500";
         });
 
-
         /* ======================
            SUBMIT HANDLER
         ====================== */
@@ -270,34 +355,78 @@
             submitRSVP(true);  // normal submit = YES confetti
         });
 
+        /* ======================
+           THANK YOU MESSAGE (localized)
+        ====================== */
+        function showThankYouMessage(join, playConfetti){
+            const box = document.getElementById("thankyou-animation");
+            if (!box) return;
+
+            const isNo = join === "No";
+
+            const title = isNo ? I18N.thanks_no_title : I18N.thanks_yes_title;
+            const body  = isNo ? I18N.thanks_no_body  : I18N.thanks_yes_body;
+
+            box.innerHTML = `
+        <h3>${title}</h3>
+        <p>${body}</p>
+      `;
+
+            box.classList.add("is-visible");
+
+            if (playConfetti && !isNo) {
+                setTimeout(launchConfetti, 200);
+            }
+
+            box.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
 
         /* ======================
            UNIFIED SUBMIT FUNCTION
         ====================== */
         async function submitRSVP(playConfetti = true) {
+            const overlay = document.getElementById("rsvp-loading");
+            const submitBtn = document.querySelector("#step-5 .submit-btn");
+            const nextBtns = document.querySelectorAll(".next-btn");
+            const backBtns = document.querySelectorAll(".back-btn");
 
-            const token = await grecaptcha.execute(SITE_KEY, { action: "submit" });
+            // Evita doppio invio
+            if (submitRSVP._busy) return;
+            submitRSVP._busy = true;
 
-            const params = new URLSearchParams();
+            // UI: mostra overlay + disabilita controlli
+            overlay?.classList.add("is-active");
+            overlay?.setAttribute("aria-hidden", "false");
 
-            // TUTTI I CAMPI (incluso join!)
-            const fields = [
-                "nome","cognome",
-                "prefix","telefono","email",
-                "join",
-                "arrivo","shuttle",
-                "allergie","listaAllergie",
-                "dieta","tipoDieta",
-                "messaggio"
-            ];
-
-            fields.forEach(f =>
-                params.append(f, document.getElementById(f)?.value || "")
-            );
-
-            params.append("token", token);
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.dataset.originalText = submitBtn.textContent;
+                submitBtn.textContent = I18N.submit_sending;
+            }
+            nextBtns.forEach(b => b.disabled = true);
+            backBtns.forEach(b => b.disabled = true);
 
             try {
+                const token = await grecaptcha.execute(SITE_KEY, { action: "submit" });
+
+                const params = new URLSearchParams();
+
+                const fields = [
+                    "nome","cognome",
+                    "prefix","telefono","email",
+                    "join",
+                    "arrivo","shuttle",
+                    "allergie","listaAllergie",
+                    "dieta","tipoDieta",
+                    "messaggio"
+                ];
+
+                fields.forEach(f =>
+                    params.append(f, document.getElementById(f)?.value || "")
+                );
+
+                params.append("token", token);
+
                 const res = await fetch(ENDPOINT, {
                     method: "POST",
                     headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -307,11 +436,12 @@
                 const json = await res.json();
 
                 if (json.status === "success") {
-                    if (playConfetti) launchConfetti();
+                    const joinValue = document.getElementById("join")?.value || "";
+
+                    showThankYouMessage(joinValue, playConfetti);
 
                     showStep(1);
                     document.getElementById("rsvp-form").reset();
-                    alert("Grazie! La tua risposta è stata registrata.");
                 } else {
                     alert("Errore: " + JSON.stringify(json));
                 }
@@ -319,9 +449,22 @@
             } catch (err) {
                 console.error(err);
                 alert("Errore di connessione.");
+            } finally {
+                // UI: ripristina
+                overlay?.classList.remove("is-active");
+                overlay?.setAttribute("aria-hidden", "true");
+
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = submitBtn.dataset.originalText || "Invia RSVP";
+                }
+
+                nextBtns.forEach(b => b.disabled = false);
+                backBtns.forEach(b => b.disabled = false);
+
+                submitRSVP._busy = false;
             }
         }
-
 
         /* ======================
            CONFETTI
