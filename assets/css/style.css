@@ -813,3 +813,29 @@ body > .grecaptcha-badge {
     from{ opacity:0; transform: translateY(12px); }
     to{ opacity:1; transform: translateY(0); }
 }
+
+/* Errori visibili SOLO dopo tentativo di submit/avanti */
+.show-errors input:invalid,
+.show-errors select:invalid,
+.show-errors textarea:invalid {
+    border-color: #d33;
+}
+
+
+.show-errors input:invalid {
+    animation: shake .15s ease 2;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    50% { transform: translateX(3px); }
+    75% { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+}
+
+.step input:focus,
+.step select:focus,
+.step textarea:focus {
+    border-color: #bbb;
+}

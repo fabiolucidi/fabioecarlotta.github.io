@@ -13,7 +13,7 @@
 
     <div class="form-container">
 
-        <form id="rsvp-form">
+        <form id="rsvp-form" novalidate>
 
             <!-- STEP 1 -->
             <div class="step active" id="step-1">
@@ -158,7 +158,7 @@
                     <select id="dieta" name="dieta" required>
                         <option value="" disabled selected hidden></option>
                         <option value="No">No</option>
-                        <option value="Yes">Yes</option>
+                        <option value="Yes">Sì</option>
                     </select>
                     <label>Segui un regime alimentare particolare?</label>
                 </div>
@@ -169,7 +169,7 @@
                         <option value="Vegetarian">Vegetariano</option>
                         <option value="Vegan">Vegano</option>
                     </select>
-                    <label>Se sì, quali?</label>
+                    <label>Se sì, quale?</label>
                 </div>
 
                 <button type="button" class="back-btn">Indietro</button>
@@ -193,7 +193,7 @@
 
         </form>
 
-        <!-- Loading overlay (localized via JS I18N) -->
+        <!-- Loading overlay -->
         <div id="rsvp-loading" class="rsvp-loading" aria-hidden="true">
             <div class="rsvp-loading__box" role="status" aria-live="polite">
                 <div class="rsvp-spinner" aria-hidden="true"></div>
@@ -202,7 +202,7 @@
             </div>
         </div>
 
-        <!-- Thank you message (localized via JS I18N) -->
+        <!-- Thank you message -->
         <div id="thankyou-animation"></div>
 
     </div>
@@ -213,7 +213,6 @@
     <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <!-- (Facoltativo) CSS inline se vuoi tenerlo in pagina: altrimenti spostalo nel tuo CSS globale -->
     <style>
         /* Loading overlay RSVP */
         .rsvp-loading{
@@ -244,7 +243,6 @@
             animation:rsvpSpin .8s linear infinite;
         }
         @keyframes rsvpSpin{ to{ transform: rotate(360deg);} }
-
         .rsvp-loading__text{ margin:0; font-weight:600; }
         .rsvp-loading__sub{ margin:6px 0 0; opacity:.75; font-size:.95rem; }
 
@@ -262,11 +260,13 @@
         #thankyou-animation.is-visible{ display:block; }
         #thankyou-animation h3{ margin:0 0 8px; font-size:1.4rem; }
         #thankyou-animation p{ margin:0; opacity:.85; }
-
         @keyframes fadeUp{
             from{ opacity:0; transform: translateY(12px); }
             to{ opacity:1; transform: translateY(0); }
         }
+
+        /* Bonus visual: highlight invalid fields */
+ }
     </style>
 
     <!-- I18N bridge from _config.yml -->
@@ -291,31 +291,91 @@
         const SITE_KEY = "6LfSNhosAAAAAAGFpMX5do3nDtl8ImAYIgpHLV8k";
 
         /* ======================
+           HELPERS
+        ====================== */
+        function hideThankYouMessage() {
+            const box = document.getElementById("thankyou-animation");
+            if (!box) return;
+            box.classList.remove("is-visible");
+            box.innerHTML = "";
+        }
+
+        function showThankYouMessage(join, playConfetti){
+            const box = document.getElementById("thankyou-animation");
+            if (!box) return;
+
+            const isNo = join === "No";
+            const title = isNo ? I18N.thanks_no_title : I18N.thanks_yes_title;
+            const body  = isNo ? I18N.thanks_no_body  : I18N.thanks_yes_body;
+
+            box.innerHTML = `<h3>${title}</h3><p>${body}</p>`;
+            box.classList.add("is-visible");
+
+            if (playConfetti && !isNo) setTimeout(launchConfetti, 200);
+            box.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+
+        function validateCurrentStep() {
+            const stepEl = document.getElementById("step-" + currentStep);
+            if (!stepEl) return true;
+
+            // 👇 attiva la visualizzazione errori
+            stepEl.classList.add("show-errors");
+
+            const fields = Array.from(stepEl.querySelectorAll("input, select, textarea"))
+                .filter(el => !el.disabled && el.offsetParent !== null);
+
+            for (const el of fields) {
+                if (!el.checkValidity()) {
+                    el.reportValidity();
+                    el.focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+
+        /* ======================
            MULTISTEP LOGIC
         ====================== */
         let currentStep = 1;
         const steps = document.querySelectorAll(".step");
 
         function showStep(n) {
-            steps.forEach(s => s.classList.remove("active"));
+            steps.forEach(s => {
+                s.classList.remove("active");
+                s.classList.remove("show-errors"); // 👈 reset errori
+            });
+
             const next = document.getElementById("step-" + n);
             if (next) {
                 next.classList.add("active");
                 currentStep = n;
             }
+
+            if (n === 1) hideThankYouMessage();
         }
+
 
         document.addEventListener("DOMContentLoaded", () => {
             showStep(1);
 
             document.getElementById("loading-title").textContent = I18N.loading_title;
             document.getElementById("loading-sub").textContent = I18N.loading_sub;
-        });
 
+            // appena l’utente ricomincia a compilare, nascondi il thankyou
+            document.getElementById("rsvp-form").addEventListener("input", () => {
+                hideThankYouMessage();
+            }, { passive: true });
+        });
 
         /* BOTTONI "NEXT" */
         document.querySelectorAll(".next-btn").forEach(btn =>
             btn.addEventListener("click", () => {
+
+                // ✅ valida lo step corrente prima di avanzare
+                if (!validateCurrentStep()) return;
 
                 // STEP 2 — Wedding Attendance
                 if (currentStep === 2) {
@@ -323,7 +383,7 @@
 
                     // If NO → immediate send
                     if (join === "No") {
-                        submitRSVP(false);  // NO CONFETTI
+                        submitRSVP(false); // NO CONFETTI
                         return;
                     }
                 }
@@ -337,15 +397,25 @@
             btn.addEventListener("click", () => showStep(currentStep - 1))
         );
 
-        /* TOGGLE ALLERGIE / DIETA */
+        /* TOGGLE ALLERGIE / DIETA + required condizionale */
         document.getElementById("allergie").addEventListener("change", e => {
-            document.getElementById("allergieField").style.display =
-                e.target.value === "Yes" ? "block" : "none";
+            const show = e.target.value === "Yes";
+            const field = document.getElementById("allergieField");
+            const textarea = document.getElementById("listaAllergie");
+
+            field.style.display = show ? "block" : "none";
+            textarea.required = show;
+            if (!show) textarea.value = "";
         });
 
         document.getElementById("dieta").addEventListener("change", e => {
-            document.getElementById("dietaField").style.display =
-                e.target.value === "Yes" ? "block" : "none";
+            const show = e.target.value === "Yes";
+            const field = document.getElementById("dietaField");
+            const select = document.getElementById("tipoDieta");
+
+            field.style.display = show ? "block" : "none";
+            select.required = show;
+            if (!show) select.value = "";
         });
 
         /* CONTATORE CARATTERI */
@@ -353,42 +423,18 @@
             document.getElementById("char-count").textContent = this.value.length + "/500";
         });
 
-        /* ======================
-           SUBMIT HANDLER
-        ====================== */
+        /* SUBMIT HANDLER */
         document.getElementById("rsvp-form").addEventListener("submit", function (e) {
             e.preventDefault();
-            submitRSVP(true);  // normal submit = YES confetti
+
+            // ✅ valida anche l’ultimo step prima di inviare
+            if (!validateCurrentStep()) return;
+
+            submitRSVP(true); // YES confetti
         });
 
         /* ======================
-           THANK YOU MESSAGE (localized)
-        ====================== */
-        function showThankYouMessage(join, playConfetti){
-            const box = document.getElementById("thankyou-animation");
-            if (!box) return;
-
-            const isNo = join === "No";
-
-            const title = isNo ? I18N.thanks_no_title : I18N.thanks_yes_title;
-            const body  = isNo ? I18N.thanks_no_body  : I18N.thanks_yes_body;
-
-            box.innerHTML = `
-        <h3>${title}</h3>
-        <p>${body}</p>
-      `;
-
-            box.classList.add("is-visible");
-
-            if (playConfetti && !isNo) {
-                setTimeout(launchConfetti, 200);
-            }
-
-            box.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-
-        /* ======================
-           UNIFIED SUBMIT FUNCTION
+           SUBMIT
         ====================== */
         async function submitRSVP(playConfetti = true) {
             const overlay = document.getElementById("rsvp-loading");
@@ -396,11 +442,9 @@
             const nextBtns = document.querySelectorAll(".next-btn");
             const backBtns = document.querySelectorAll(".back-btn");
 
-            // Evita doppio invio
             if (submitRSVP._busy) return;
             submitRSVP._busy = true;
 
-            // UI: mostra overlay + disabilita controlli
             overlay?.classList.add("is-active");
             overlay?.setAttribute("aria-hidden", "false");
 
@@ -416,7 +460,6 @@
                 const token = await grecaptcha.execute(SITE_KEY, { action: "submit" });
 
                 const params = new URLSearchParams();
-
                 const fields = [
                     "nome","cognome",
                     "prefix","telefono","email",
@@ -427,10 +470,7 @@
                     "messaggio"
                 ];
 
-                fields.forEach(f =>
-                    params.append(f, document.getElementById(f)?.value || "")
-                );
-
+                fields.forEach(f => params.append(f, document.getElementById(f)?.value || ""));
                 params.append("token", token);
 
                 const res = await fetch(ENDPOINT, {
@@ -444,10 +484,18 @@
                 if (json.status === "success") {
                     const joinValue = document.getElementById("join")?.value || "";
 
+                    // ✅ mostra messaggio prima di resettare
                     showThankYouMessage(joinValue, playConfetti);
 
                     showStep(1);
                     document.getElementById("rsvp-form").reset();
+
+                    // ripristina required condizionali e campi nascosti
+                    document.getElementById("allergieField").style.display = "none";
+                    document.getElementById("listaAllergie").required = false;
+                    document.getElementById("dietaField").style.display = "none";
+                    document.getElementById("tipoDieta").required = false;
+
                 } else {
                     alert("Errore: " + JSON.stringify(json));
                 }
@@ -456,7 +504,6 @@
                 console.error(err);
                 alert("Errore di connessione.");
             } finally {
-                // UI: ripristina
                 overlay?.classList.remove("is-active");
                 overlay?.setAttribute("aria-hidden", "true");
 
@@ -464,7 +511,6 @@
                     submitBtn.disabled = false;
                     submitBtn.textContent = submitBtn.dataset.originalText || "Invia RSVP";
                 }
-
                 nextBtns.forEach(b => b.disabled = false);
                 backBtns.forEach(b => b.disabled = false);
 
