@@ -97,12 +97,6 @@ main {
 }
 
 
-.raleway-<uniquifier> {
-              font-family: "Raleway", sans-serif;
-              font-optical-sizing: auto;
-              font-weight: <weight>;
-              font-style: normal;
-          }
 
 
 /* Hero split */
@@ -439,7 +433,7 @@ main {
 
 .commit a {
     text-decoration: none;
-    font-family: Menlo, Consolas, Monaco, "Courier New", Courier, monospace
+    font-family: Menlo, Consolas, Monaco, "Courier New", Courier, monospace;
     font-size: 0.75rem;
     font-weight: 400;
     padding: 0.5em;
@@ -839,3 +833,25 @@ body > .grecaptcha-badge {
 .step textarea:focus {
     border-color: #bbb;
 }
+
+.map-link {
+    color: inherit;              /* stesso colore del testo */
+    text-decoration: none;       /* niente sottolineatura */
+    border-bottom: 1px dotted rgba(0,0,0,0.25);
+    transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.map-link:hover {
+    border-bottom-color: rgba(0,0,0,0.6);
+    opacity: 0.85;
+}
+
+
+
+.raleway-regular {
+              font-family: "Raleway", sans-serif;
+              font-optical-sizing: auto;
+              font-weight: 400;
+              font-style: normal;
+          }
+
