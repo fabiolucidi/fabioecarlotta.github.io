@@ -2,7 +2,9 @@
 <html lang="{{ page.lang | default: 'it' }}">
   <head>
     <meta charset="UTF-8" />
-    <title>{{ page.title | default: site.title }}</title>
+    <meta name="description" content="Il matrimonio che aspettavi: Fabio e Carlotta si sposano il 20 giugno 2026 a Villa Pellegrini, Romagnano di Valpantena (VR).">
+
+      <title>{{ page.title | default: site.title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
@@ -36,7 +38,8 @@
         {% include {{ page.lang }}/story.html %}
         {% include {{ page.lang }}/whwh.html %}
         {% include {{ page.lang }}/where.html %}
-        {% include {{ page.lang }}/rsvp.html %}
+        {% comment %}        <!-- {% include {{ page.lang }}/rsvp.html %} --> {% endcomment %}
+        {% include {{ page.lang }}/registry.html %}
         {% include {{ page.lang }}/qa.html %}
 
 
