@@ -27,6 +27,7 @@ i18n:
       registry: "Lista nozze"
       where_stay: "Dove dormire"
       qa: "Q&A"
+      legacy: "E ora?"
     sections:
       story: "Storia"
       where_when: "Cerimonia e party"
@@ -34,6 +35,7 @@ i18n:
       registry: "Lista nozze"
       where_stay: "Dove dormire"
       qa: "Q&A"
+      legacy: "E ora?"
     loading_title: "Invio in corso…"
     loading_sub: "Attendi un secondo 💛"
     thanks_yes_title: "RSVP ricevuto ✨"
@@ -51,6 +53,7 @@ i18n:
       registry: "Registry"
       where_stay: "Where to Stay"
       qa: "Q&A"
+      legacy: "Legacy"
     sections:
       story: "Story"
       where_when: "Where & When"
@@ -58,6 +61,7 @@ i18n:
       registry: "Registry"
       where_stay: "Where to Stay"
       qa: "Q&A"
+      legacy: "Legacy"
     loading_title: "Sending…"
     loading_sub: "Just a second 💛"
     thanks_yes_title: "RSVP received ✨"
