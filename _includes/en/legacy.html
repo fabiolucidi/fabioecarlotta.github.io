@@ -1,0 +1,310 @@
+<section id="legacy" class="section-std">
+
+
+    <style>
+        /* ── Griglia dischi ── */
+        .disco-grid {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .disco-option { display: none; }
+
+        .disco-option + label {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: "Raleway", system-ui, sans-serif;
+            font-size: 0.95rem;
+            background: #fcfcfc;
+            transition: border-color .2s, background .2s;
+            user-select: none;
+        }
+
+        .disco-option + label:hover {
+            border-color: #bca98c;
+        }
+
+        .disco-option:checked + label {
+            border-color: #111;
+            background: #111;
+            color: #fff;
+        }
+
+        .disco-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1.5px solid currentColor;
+            flex-shrink: 0;
+            transition: background .18s;
+        }
+
+        .disco-option:checked + label .disco-dot {
+            background: #fff;
+        }
+
+        .disco-meta { display: flex; flex-direction: column; }
+
+        .disco-artist {
+            font-size: 0.75rem;
+            opacity: 0.6;
+            margin-top: 1px;
+        }
+
+        /* ── Validation flash ── */
+        .show-errors .disco-grid.empty-choice {
+            outline: 2px solid #d33;
+            border-radius: 10px;
+        }
+    </style>
+
+    <div class="section-std default-title">
+        <h2>Legacy</h2><!-- ✏️ TESTO: titolo della pagina -->
+    </div>
+
+    <div class="section-std">
+        <p class="default-text">
+            <!-- ✏️ TESTO: descrizione / istruzioni per gli ospiti -->
+            Vogliamo lasciarvi qualcosa di duraturo: un disco scelto da voi,
+            che speriamo entri a far parte delle vostre playlist per anni.
+            Dite la vostra — uno per famiglia o coppia — e lo troverete al vostro posto il giorno del matrimonio.
+        </p>
+    </div>
+
+    <div class="form-container">
+
+        <!-- ── Spinner di caricamento ── -->
+        <div class="rsvp-loading" id="legacyLoading">
+            <div class="rsvp-loading__box">
+                <div class="rsvp-spinner"></div>
+                <p class="rsvp-loading__text">Invio in corso…</p>
+                <p class="rsvp-loading__sub">Solo un momento.</p>
+            </div>
+        </div>
+
+        <form id="legacyForm" novalidate>
+
+            <!-- ══ STEP 1 — Scegli il disco ══ -->
+            <div class="step active" id="step1">
+                <p class="step-title">Quale disco scegli?</p><!-- ✏️ TESTO -->
+
+                <div class="disco-grid" id="discoGrid" role="radiogroup">
+
+                    <input class="disco-option" type="radio" name="disco" id="d01" value="Thriller – Michael Jackson" />
+                    <label for="d01">
+                        <span class="disco-dot"></span>
+                        <span class="disco-meta">
+            <span>Thriller</span>
+            <span class="disco-artist">Michael Jackson</span>
+          </span>
+                    </label>
+
+                    <input class="disco-option" type="radio" name="disco" id="d02" value="Possibili scenari – Cremonini" />
+                    <label for="d02">
+                        <span class="disco-dot"></span>
+                        <span class="disco-meta">
+            <span>Possibili scenari</span>
+            <span class="disco-artist">Cremonini</span>
+          </span>
+                    </label>
+
+                    <input class="disco-option" type="radio" name="disco" id="d03" value="AM – Arctic Monkeys" />
+                    <label for="d03">
+                        <span class="disco-dot"></span>
+                        <span class="disco-meta">
+            <span>AM</span>
+            <span class="disco-artist">Arctic Monkeys</span>
+          </span>
+                    </label>
+
+                    <input class="disco-option" type="radio" name="disco" id="d04" value="The Miseducation of Lauryn Hill – Lauryn Hill" />
+                    <label for="d04">
+                        <span class="disco-dot"></span>
+                        <span class="disco-meta">
+            <span>The Miseducation of Lauryn Hill</span>
+            <span class="disco-artist">Lauryn Hill</span>
+          </span>
+                    </label>
+
+                    <input class="disco-option" type="radio" name="disco" id="d05" value="Is This It – The Strokes" />
+                    <label for="d05">
+                        <span class="disco-dot"></span>
+                        <span class="disco-meta">
+            <span>Is This It</span>
+            <span class="disco-artist">The Strokes</span>
+          </span>
+                    </label>
+
+                    <input class="disco-option" type="radio" name="disco" id="d06" value="1989 – Taylor Swift" />
+                    <label for="d06">
+                        <span class="disco-dot"></span>
+                        <span class="disco-meta">
+            <span>1989</span>
+            <span class="disco-artist">Taylor Swift</span>
+          </span>
+                    </label>
+
+                    <input class="disco-option" type="radio" name="disco" id="d07" value="Currents – Tame Impala" />
+                    <label for="d07">
+                        <span class="disco-dot"></span>
+                        <span class="disco-meta">
+            <span>Currents</span>
+            <span class="disco-artist">Tame Impala</span>
+          </span>
+                    </label>
+
+                    <input class="disco-option" type="radio" name="disco" id="d08" value="Wolfgang Amadeus Phoenix – Phoenix" />
+                    <label for="d08">
+                        <span class="disco-dot"></span>
+                        <span class="disco-meta">
+            <span>Wolfgang Amadeus Phoenix</span>
+            <span class="disco-artist">Phoenix</span>
+          </span>
+                    </label>
+
+                    <input class="disco-option" type="radio" name="disco" id="d09" value="In Colour – Jamie xx" />
+                    <label for="d09">
+                        <span class="disco-dot"></span>
+                        <span class="disco-meta">
+            <span>In Colour</span>
+            <span class="disco-artist">Jamie xx</span>
+          </span>
+                    </label>
+
+                    <input class="disco-option" type="radio" name="disco" id="d10" value="Vampire Weekend – Vampire Weekend" />
+                    <label for="d10">
+                        <span class="disco-dot"></span>
+                        <span class="disco-meta">
+            <span>Vampire Weekend</span>
+            <span class="disco-artist">Vampire Weekend</span>
+          </span>
+                    </label>
+
+                    <input class="disco-option" type="radio" name="disco" id="d11" value="Liberato – Liberato" />
+                    <label for="d11">
+                        <span class="disco-dot"></span>
+                        <span class="disco-meta">
+            <span>Liberato</span>
+            <span class="disco-artist">Liberato</span>
+          </span>
+                    </label>
+
+                </div><!-- /disco-grid -->
+
+                <button type="button" class="next-btn" id="btn1">Avanti →</button>
+            </div>
+
+            <!-- ══ STEP 2 — Dati personali ══ -->
+            <div class="step" id="step2">
+                <p class="step-title">I tuoi dati</p><!-- ✏️ TESTO -->
+
+                <div class="floating-label">
+                    <input type="text" id="nome" name="nome" placeholder=" " autocomplete="given-name" required />
+                    <label for="nome">Nome</label><!-- ✏️ TESTO -->
+                </div>
+
+                <div class="floating-label">
+                    <input type="text" id="cognome" name="cognome" placeholder=" " autocomplete="family-name" required />
+                    <label for="cognome">Cognome</label><!-- ✏️ TESTO -->
+                </div>
+
+                <div class="floating-label">
+                    <input type="email" id="email" name="email" placeholder=" " autocomplete="email" required />
+                    <label for="email">Email</label><!-- ✏️ TESTO -->
+                </div>
+
+                <div class="floating-label">
+                    <input type="tel" id="telefono" name="telefono" placeholder=" " autocomplete="tel" required />
+                    <label for="telefono">Telefono</label><!-- ✏️ TESTO -->
+                </div>
+
+                <div style="display:flex; gap:12px;">
+                    <button type="button" class="back-btn" id="btn2back" style="background:#888;">← Indietro</button>
+                    <button type="submit" class="submit-btn">Conferma →</button><!-- ✏️ TESTO -->
+                </div>
+            </div>
+
+        </form><!-- /legacyForm -->
+
+        <!-- ══ Thank you ══ -->
+        <div id="thankyou-animation">
+            <h3>Grazie! 🎶</h3><!-- ✏️ TESTO -->
+            <p>Abbiamo registrato la tua scelta. Ci vediamo il 20 giugno!</p><!-- ✏️ TESTO -->
+        </div>
+
+    </div><!-- /form-container -->
+
+
+    <script>
+        // ✏️ Incolla qui l'URL del tuo Google Apps Script pubblicato
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyMSsEHCPv_b_IANYk9it-Wz494rdT-vVdCBM9-hdtG8iwn7v1JAD32cB9lwaf7w4bOqg/exec';
+
+        /* ── Step navigation ── */
+        const steps   = document.querySelectorAll('.step');
+        const form    = document.getElementById('legacyForm');
+        const loading = document.getElementById('legacyLoading');
+        const thanks  = document.getElementById('thankyou-animation');
+
+        function showStep(n) {
+            steps.forEach((s, i) => {
+                s.classList.toggle('active', i === n);
+            });
+        }
+
+        // Avanti: step 1 → step 2
+        document.getElementById('btn1').addEventListener('click', () => {
+            const disco = form.querySelector('input[name="disco"]:checked');
+            const grid  = document.getElementById('discoGrid');
+            if (!disco) {
+                grid.classList.add('empty-choice');
+                form.classList.add('show-errors');
+                return;
+            }
+            grid.classList.remove('empty-choice');
+            form.classList.remove('show-errors');
+            showStep(1);
+        });
+
+        // Indietro: step 2 → step 1
+        document.getElementById('btn2back').addEventListener('click', () => showStep(0));
+
+        /* ── Submit ── */
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            form.classList.add('show-errors');
+
+            const nome     = form.nome.value.trim();
+            const cognome  = form.cognome.value.trim();
+            const email    = form.email.value.trim();
+            const telefono = form.telefono.value.trim();
+            const disco    = form.querySelector('input[name="disco"]:checked');
+
+            if (!nome || !cognome || !email || !telefono || !disco) return;
+
+            loading.classList.add('is-active');
+
+            const payload = new URLSearchParams({
+                timestamp: new Date().toISOString(),
+                nome, cognome, email, telefono,
+                disco: disco.value
+            });
+
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: payload });
+            } catch (_) {
+                // no-cors: non possiamo leggere la risposta, assumiamo successo
+            }
+
+            loading.classList.remove('is-active');
+            form.style.display = 'none';
+            thanks.classList.add('is-visible');
+        });
+    </script>
+
+</section>
