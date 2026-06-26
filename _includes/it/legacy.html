@@ -96,36 +96,10 @@
 
             <!-- ══ STEP 1 — Scegli il disco ══ -->
             <div class="step active" id="step1">
-                <p class="step-title">Quale disco vorresti?</p>
+                <p class="step-title">Which record would you like?</p>
 
                 <div class="disco-grid" id="discoGrid" role="radiogroup">
 
-                    <input class="disco-option" type="radio" name="disco" id="d01" value="Thriller – Michael Jackson" />
-                    <label for="d01">
-                        <span class="disco-dot"></span>
-                        <span class="disco-meta">
-            <span>Thriller</span>
-            <span class="disco-artist">Michael Jackson</span>
-          </span>
-                    </label>
-
-                    <input class="disco-option" type="radio" name="disco" id="d02" value="Possibili scenari – Cremonini" />
-                    <label for="d02">
-                        <span class="disco-dot"></span>
-                        <span class="disco-meta">
-            <span>Possibili scenari</span>
-            <span class="disco-artist">Cremonini</span>
-          </span>
-                    </label>
-
-                    <input class="disco-option" type="radio" name="disco" id="d03" value="AM – Arctic Monkeys" />
-                    <label for="d03">
-                        <span class="disco-dot"></span>
-                        <span class="disco-meta">
-            <span>AM</span>
-            <span class="disco-artist">Arctic Monkeys</span>
-          </span>
-                    </label>
 
                     <input class="disco-option" type="radio" name="disco" id="d04" value="The Miseducation of Lauryn Hill – Lauryn Hill" />
                     <label for="d04">
@@ -163,47 +137,38 @@
           </span>
                     </label>
 
-                    <input class="disco-option" type="radio" name="disco" id="d11" value="Liberato – Liberato" />
-                    <label for="d11">
-                        <span class="disco-dot"></span>
-                        <span class="disco-meta">
-            <span>Liberato</span>
-            <span class="disco-artist">Liberato</span>
-          </span>
-                    </label>
-
                 </div><!-- /disco-grid -->
 
-                <button type="button" class="next-btn" id="btn1">Avanti →</button>
+                <button type="button" class="next-btn" id="btn1">Next →</button>
             </div>
 
             <!-- ══ STEP 2 — Dati personali ══ -->
             <div class="step" id="step2">
-                <p class="step-title">I tuoi dati</p><!-- ✏️ TESTO -->
+                <p class="step-title">Your details</p>
 
                 <div class="floating-label">
                     <input type="text" id="nome" name="nome" placeholder=" " autocomplete="given-name" required />
-                    <label for="nome">Nome</label><!-- ✏️ TESTO -->
+                    <label for="nome">First name</label>
                 </div>
 
                 <div class="floating-label">
                     <input type="text" id="cognome" name="cognome" placeholder=" " autocomplete="family-name" required />
-                    <label for="cognome">Cognome</label><!-- ✏️ TESTO -->
+                    <label for="cognome">Last name</label>
                 </div>
 
                 <div class="floating-label">
                     <input type="email" id="email" name="email" placeholder=" " autocomplete="email" required />
-                    <label for="email">Email</label><!-- ✏️ TESTO -->
+                    <label for="email">Email</label>
                 </div>
 
                 <div class="floating-label">
                     <input type="tel" id="telefono" name="telefono" placeholder=" " autocomplete="tel" required />
-                    <label for="telefono">Telefono</label><!-- ✏️ TESTO -->
+                    <label for="telefono">Phone number</label>
                 </div>
 
                 <div style="display:flex; gap:12px;">
-                    <button type="button" class="back-btn" id="btn2back" style="background:#888;">← Indietro</button>
-                    <button type="submit" class="submit-btn">Conferma →</button><!-- ✏️ TESTO -->
+                    <button type="button" class="back-btn" id="btn2back" style="background:#888;">← Back</button>
+                    <button type="submit" class="submit-btn">Confirm →</button>
                 </div>
             </div>
 
